@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Trading Journal v1.9.3</title>
+<title>Trading Journal v1.7.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -24,7 +24,21 @@
   --input-bg:#fff;--input-bdr:rgba(0,0,0,.15);
   --dec:none;
 }
-
+[data-theme="dark"]{
+  --bg:#252a38;--bg2:#2e3447;--bg3:#363d56;--bg4:#222738;
+  --border:rgba(255,255,255,.09);--border2:rgba(255,255,255,.16);
+  --txt:#d8dff0;--txt2:#7a90bb;--txt3:#4a5c7a;
+  --green:#2dd4a0;--gbg:rgba(45,212,160,.12);--gbdr:rgba(45,212,160,.28);
+  --red:#f06292;--rbg:rgba(240,98,146,.12);--rbdr:rgba(240,98,146,.28);
+  --acc:#7b8fff;--abg:rgba(123,143,255,.15);--abdr:rgba(123,143,255,.35);
+  --sh:0 1px 4px rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.18);
+  --sh2:0 2px 10px rgba(0,0,0,.28),0 8px 28px rgba(0,0,0,.24);
+  --logo-bg:#7b8fff;--logo-fg:#111828;
+  --agg-bg:rgba(123,143,255,.12);--agg-bdr:rgba(123,143,255,.28);--agg-txt:#9aabff;
+  --mono:'DM Mono',monospace;--display:'Fraunces',serif;--body:'DM Sans',sans-serif;
+  --input-bg:#2e3447;--input-bdr:rgba(255,255,255,.15);
+  --dec:none;
+}
 [data-theme="midnight"]{
   --bg:#0e1628;--bg2:#162038;--bg3:#1c2a46;--bg4:#111c34;
   --border:rgba(100,150,255,.08);--border2:rgba(100,150,255,.16);
@@ -40,37 +54,50 @@
   --input-bg:#162038;--input-bdr:rgba(100,150,255,.14);
   --dec:none;
 }
-
+[data-theme="pro"]{
+  --bg:#232030;--bg2:#2c293e;--bg3:#36324e;--bg4:#1e1b2a;
+  --border:rgba(212,168,67,.12);--border2:rgba(212,168,67,.24);
+  --txt:#f0e8d0;--txt2:#a08c64;--txt3:#5e5038;
+  --green:#4ade80;--gbg:rgba(74,222,128,.11);--gbdr:rgba(74,222,128,.26);
+  --red:#f87171;--rbg:rgba(248,113,113,.11);--rbdr:rgba(248,113,113,.26);
+  --acc:#d4a843;--abg:rgba(212,168,67,.12);--abdr:rgba(212,168,67,.32);
+  --sh:0 1px 5px rgba(0,0,0,.22),0 4px 16px rgba(0,0,0,.2);
+  --sh2:0 2px 10px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.28);
+  --logo-bg:transparent;--logo-fg:#d4a843;
+  --agg-bg:rgba(212,168,67,.1);--agg-bdr:rgba(212,168,67,.28);--agg-txt:#d4a843;
+  --mono:'DM Mono',monospace;--display:'Playfair Display',serif;--body:'DM Sans',sans-serif;
+  --input-bg:#2c293e;--input-bdr:rgba(212,168,67,.2);
+  --dec:radial-gradient(ellipse 80% 50% at 15% 20%,rgba(212,168,67,.05) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 85% 80%,rgba(79,157,255,.03) 0%,transparent 60%);
+}
 [data-theme="forest"]{
-  --bg:#ebf5ef;--bg2:#f5fdf7;--bg3:#d8ede0;--bg4:#f0faf2;
-  --border:rgba(22,101,52,.1);--border2:rgba(22,101,52,.18);
-  --txt:#052e16;--txt2:#166534;--txt3:#4ade80;
-  --txt3:#4d9963;
-  --green:#166534;--gbg:#dcfce7;--gbdr:#86efac;
-  --red:#991b1b;--rbg:#fee2e2;--rbdr:#fca5a5;
-  --acc:#059669;--abg:#d1fae5;--abdr:#6ee7b7;
-  --sh:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
-  --sh2:0 2px 8px rgba(0,0,0,.09),0 8px 28px rgba(0,0,0,.09);
-  --logo-bg:#059669;--logo-fg:#fff;
-  --agg-bg:#d1fae5;--agg-bdr:#6ee7b7;--agg-txt:#065f46;
+  --bg:#1e3028;--bg2:#273d32;--bg3:#304c3e;--bg4:#192a22;
+  --border:rgba(52,211,153,.1);--border2:rgba(52,211,153,.2);
+  --txt:#c8eedd;--txt2:#6aaa88;--txt3:#3c6450;
+  --green:#34d399;--gbg:rgba(52,211,153,.13);--gbdr:rgba(52,211,153,.3);
+  --red:#fb7185;--rbg:rgba(251,113,133,.12);--rbdr:rgba(251,113,133,.28);
+  --acc:#34d399;--abg:rgba(52,211,153,.13);--abdr:rgba(52,211,153,.32);
+  --sh:0 1px 4px rgba(0,0,0,.18),0 4px 14px rgba(0,0,0,.16);
+  --sh2:0 2px 10px rgba(0,0,0,.25),0 8px 28px rgba(0,0,0,.22);
+  --logo-bg:#34d399;--logo-fg:#0e2018;
+  --agg-bg:rgba(52,211,153,.11);--agg-bdr:rgba(52,211,153,.28);--agg-txt:#6ee7b7;
   --mono:'DM Mono',monospace;--display:'Fraunces',serif;--body:'DM Sans',sans-serif;
-  --input-bg:#f5fdf7;--input-bdr:rgba(22,101,52,.18);
-  --dec:none;
+  --input-bg:#273d32;--input-bdr:rgba(52,211,153,.18);
+  --dec:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(52,211,153,.07) 0%,transparent 60%);
 }
 [data-theme="dusk"]{
-  --bg:#ede9fb;--bg2:#faf8ff;--bg3:#ddd6f8;--bg4:#f4f0ff;
-  --border:rgba(109,40,217,.1);--border2:rgba(109,40,217,.18);
-  --txt:#1e1040;--txt2:#6d28d9;--txt3:#7c6db0;
-  --green:#166534;--gbg:#dcfce7;--gbdr:#86efac;
-  --red:#991b1b;--rbg:#fee2e2;--rbdr:#fca5a5;
-  --acc:#7c3aed;--abg:#ede9fb;--abdr:#c4b5fd;
-  --sh:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
-  --sh2:0 2px 8px rgba(0,0,0,.09),0 8px 28px rgba(0,0,0,.09);
-  --logo-bg:#7c3aed;--logo-fg:#fff;
-  --agg-bg:#ede9fb;--agg-bdr:#c4b5fd;--agg-txt:#5b21b6;
+  --bg:#272040;--bg2:#322a50;--bg3:#3d3462;--bg4:#211a38;
+  --border:rgba(167,139,250,.1);--border2:rgba(167,139,250,.2);
+  --txt:#ddd6f8;--txt2:#8878c0;--txt3:#504878;
+  --green:#4ade80;--gbg:rgba(74,222,128,.12);--gbdr:rgba(74,222,128,.28);
+  --red:#fb7185;--rbg:rgba(251,113,133,.12);--rbdr:rgba(251,113,133,.28);
+  --acc:#a78bfa;--abg:rgba(167,139,250,.15);--abdr:rgba(167,139,250,.35);
+  --sh:0 1px 4px rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.18);
+  --sh2:0 2px 10px rgba(0,0,0,.28),0 8px 28px rgba(0,0,0,.24);
+  --logo-bg:#a78bfa;--logo-fg:#160e2e;
+  --agg-bg:rgba(167,139,250,.12);--agg-bdr:rgba(167,139,250,.28);--agg-txt:#c4b5fd;
   --mono:'DM Mono',monospace;--display:'Fraunces',serif;--body:'DM Sans',sans-serif;
-  --input-bg:#faf8ff;--input-bdr:rgba(109,40,217,.18);
-  --dec:none;
+  --input-bg:#322a50;--input-bdr:rgba(167,139,250,.18);
+  --dec:radial-gradient(ellipse 80% 60% at 80% 0%,rgba(167,139,250,.07) 0%,transparent 55%);
 }
 /* ════════════ BASE ════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -85,10 +112,10 @@ body::before{content:'';position:fixed;inset:0;background:var(--dec,none);pointe
 .hdr{display:flex;align-items:center;padding:16px 0 0;gap:10px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .logo-mk{width:38px;height:38px;background:var(--logo-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--logo-fg);transition:all .35s;flex-shrink:0;overflow:hidden}
-
-
+[data-theme="pro"] .logo-mk{background:transparent;border:1.5px solid var(--acc);border-radius:8px}
+[data-theme="pro"] .logo-mk svg{filter:drop-shadow(0 0 4px rgba(212,168,67,.3))}
 .logo-nm{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.03em;transition:font-family .3s}
-
+[data-theme="pro"] .logo-nm{font-weight:600;letter-spacing:.01em}
 .logo-sb{font-family:var(--mono);font-size:9px;color:var(--txt3);letter-spacing:.09em;text-transform:uppercase;margin-top:1px}
 /* Tab nav */
 .tab-nav{display:flex;align-items:center;gap:2px;background:var(--bg3);border-radius:10px;padding:3px;margin-left:10px;overflow-x:auto;flex-shrink:0;transition:background .3s}
@@ -188,10 +215,10 @@ table.ret-tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-s
 .agg-cell.pos{color:var(--green)}.agg-cell.neg{color:var(--red)}.agg-cell.na{color:var(--txt3)}
 /* ════════════ OPTIMAL EXIT ════════════ */
 .opt-panel{background:var(--bg2);border:1px solid var(--border);border-radius:13px;padding:16px 18px;box-shadow:var(--sh);margin-bottom:18px;transition:background .3s,border-color .3s}
-.opt-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
-.opt-title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.opt-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
 .opt-title{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-.02em}
-.opt-sub{font-family:var(--mono);font-size:10px;color:var(--txt3)}
+.opt-sub{font-family:var(--mono);font-size:10px;color:var(--txt3);margin-top:3px}
+.opt-insight{font-family:var(--mono);font-size:11px;color:var(--txt2);background:var(--bg3);border-radius:6px;padding:6px 10px;border:1px solid var(--border);margin-top:8px}
 #opt-canvas-wrap{position:relative;margin-top:10px;transition:height .3s}
 #opt-canvas-wrap.tall{height:300px}
 #opt-canvas-wrap.dual{height:210px}
@@ -289,7 +316,7 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 .lo-opt:hover{border-color:var(--acc)}
 .lo-opt.active{border-color:var(--acc);background:var(--abg)}
 .lo-prev{width:34px;height:34px;background:var(--logo-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--logo-fg);transition:all .3s}
-
+[data-theme="pro"] .lo-prev{background:transparent;border:1.5px solid var(--acc);color:var(--acc)}
 .lo-lbl{font-family:var(--mono);font-size:9px;color:var(--txt2);text-transform:uppercase;letter-spacing:.05em}
 .opt-mode-btn{padding:7px 14px;font-family:var(--mono);font-size:11px;border-radius:7px;border:1px solid var(--border2);background:var(--bg3);color:var(--txt3);cursor:pointer;transition:all .16s;text-transform:uppercase;letter-spacing:.05em}
 .opt-mode-btn:hover{border-color:var(--acc);color:var(--acc)}
@@ -327,7 +354,6 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
   <nav class="tab-nav" id="tab-nav" style="display:none">
     <button class="tab-btn active" data-tab="overview">📈 Overview</button>
     <button class="tab-btn" data-tab="charts">📊 Charts</button>
-    <button class="tab-btn" data-tab="strategy">🧠 Strategy</button>
     <button class="tab-btn" data-tab="newtrade">✏️ Add / Edit</button>
     <button class="tab-btn cog-btn" data-tab="settings" title="Settings">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -388,14 +414,10 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
   <div id="tab-charts" class="tab-panel" style="display:none">
     <div class="sum-bar" id="ch-sum"></div>
     <div class="opt-panel" id="opt-panel" style="display:none">
-      <div class="opt-hdr">
-        <div class="opt-title-row">
-          <span class="opt-title">🚪 Optimal Exit Analysis</span>
-          <span class="opt-sub" id="opt-sub"></span>
-        </div>
-        <button class="btn btn-sm" onclick="updateOptExit()">↺</button>
-      </div>
+      <div class="opt-hdr"><div><div class="opt-title">📍 Optimal Exit Analysis</div><div class="opt-sub" id="opt-sub">% return vs days held</div></div>
+        <button class="btn btn-sm" onclick="updateOptExit()">↺</button></div>
       <div id="opt-canvas-wrap" class="tall"><canvas id="opt-canvas"></canvas></div>
+      <div class="opt-insight" id="opt-insight"></div>
     </div>
     <div class="ctrl-bar">
       <span class="ctl">Sort</span>
@@ -408,55 +430,6 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
     <div class="tag-row" id="ch-tags" style="display:none"><span class="ctl">Tags</span><button class="tpb sel" id="ch-tag-all">All tags</button></div>
     <div id="cards-grid"></div>
     <div class="empty" id="ch-empty" style="display:none"><div class="empty-ic">🔍</div><h3>No trades match</h3><p>Adjust filters.</p></div>
-  </div>
-
-
-  <!-- STRATEGY TAB -->
-  <div id="tab-strategy" class="tab-panel" style="display:none">
-    <div class="sum-bar" id="strat-sum-bar"></div>
-    <!-- Controls -->
-    <div class="strat-nav" id="strat-ctrl">
-      <div class="strat-view-group">
-        <button class="strat-view-btn active" data-sview="tags">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="2" fill="currentColor"/><circle cx="3" cy="12" r="2" fill="currentColor"/><circle cx="3" cy="18" r="2" fill="currentColor"/></svg>
-          By Tag
-        </button>
-        <button class="strat-view-btn" data-sview="combos">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          Combinations
-        </button>
-        <button class="strat-view-btn" data-sview="optimize">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Optimizer
-        </button>
-      </div>
-      <div class="strat-sep"></div>
-      <div class="strat-metric-group">
-        <span class="strat-metric-lbl">Metric</span>
-        <button class="strat-metric-btn active" data-smetric="return" title="Average % return of all trades with this tag. Positive = profitable, negative = loss.">Avg Return</button>
-        <button class="strat-metric-btn" data-smetric="winrate" title="Percentage of trades that ended positive. 50% = break-even, 100% = all winners.">Win Rate</button>
-        <button class="strat-metric-btn" data-smetric="sharpe" title="Sharpe-like ratio: avg return ÷ std deviation of returns. Higher = better risk-adjusted performance. Above 1.0 is strong; below 0 means high variance relative to return.">Sharpe ⓘ</button>
-      </div>
-      <div class="tc-c" id="strat-count"></div>
-    </div>
-    <!-- Rankings table -->
-    <div style="margin-top:18px">
-      <div class="sec-row">
-        <div class="sec-ttl" id="strat-table-title">Tag Performance Rankings</div>
-        <span style="font-family:var(--mono);font-size:10px;color:var(--txt3)" id="strat-note"></span>
-      </div>
-      <div class="tl-wrap">
-        <table class="tl-tbl" id="strat-tbl">
-          <thead><tr id="strat-thead-row"></tr></thead>
-          <tbody id="strat-tbody"></tbody>
-        </table>
-      </div>
-    </div>
-    <!-- Optimizer output -->
-    <div id="optimizer-out" style="display:none;margin-top:18px">
-      <div class="sec-row"><div class="sec-ttl">Optimizer Results</div></div>
-      <div id="optimizer-content"></div>
-    </div>
   </div>
 
   <!-- ADD/EDIT -->
@@ -474,7 +447,6 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
           <div class="tag-sec">
             <div><div class="tz-lbl">✓ Selected</div><div class="sel-area empty" id="sel-tags"></div></div>
             <div id="sug-zone"><div class="tz-lbl">Suggested from your trades</div><div id="tag-chips" style="display:flex;flex-wrap:wrap;gap:5px"></div></div>
-            <div id="stock-sug-zone" style="display:none"><div class="tz-lbl">Suggested for this stock <span style="color:var(--acc);font-size:9px">(from lookup)</span></div><div id="stock-tag-chips" style="display:flex;flex-wrap:wrap;gap:5px"></div></div>
             <div><div class="tz-lbl">Add custom tag</div><div class="tag-add-r"><input type="text" id="tag-custom" placeholder="#custom · Enter to add"/><button class="btn btn-sm" id="tag-add-btn">Add</button></div></div>
           </div>
         </div>
@@ -508,9 +480,11 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
         <h4>🎨 Theme</h4><p class="s-desc">Six visual modes — from clean light to professional dark.</p>
         <div class="th-opts" id="th-opts">
           <div class="th-opt" data-theme="light"   onclick="setTheme('light')"><div class="th-sw" style="background:linear-gradient(135deg,#f0f3f8,#fff)"></div><span class="th-lbl">Light</span></div>
+          <div class="th-opt" data-theme="dark"    onclick="setTheme('dark')"><div class="th-sw" style="background:linear-gradient(135deg,#252a38,#2e3447)"></div><span class="th-lbl">Steel</span></div>
           <div class="th-opt" data-theme="midnight" onclick="setTheme('midnight')"><div class="th-sw" style="background:linear-gradient(135deg,#0e1628,#162038)"></div><span class="th-lbl">Midnight</span></div>
-          <div class="th-opt" data-theme="forest"  onclick="setTheme('forest')"><div class="th-sw" style="background:linear-gradient(135deg,#ebf5ef,#f5fdf7);border-color:rgba(5,150,105,.4)"></div><span class="th-lbl" style="color:#059669">Sage</span></div>
-          <div class="th-opt" data-theme="dusk"    onclick="setTheme('dusk')"><div class="th-sw" style="background:linear-gradient(135deg,#ede9fb,#faf8ff);border-color:rgba(124,58,237,.4)"></div><span class="th-lbl" style="color:#7c3aed">Violet</span></div>
+          <div class="th-opt" data-theme="pro"     onclick="setTheme('pro')"><div class="th-sw" style="background:linear-gradient(135deg,#232030,#2c293e);border-color:rgba(212,168,67,.5)"></div><span class="th-lbl" style="color:#d4a843">Gold ✦</span></div>
+          <div class="th-opt" data-theme="forest"  onclick="setTheme('forest')"><div class="th-sw" style="background:linear-gradient(135deg,#1e3028,#273d32);border-color:rgba(52,211,153,.5)"></div><span class="th-lbl" style="color:#34d399">Sage</span></div>
+          <div class="th-opt" data-theme="dusk"    onclick="setTheme('dusk')"><div class="th-sw" style="background:linear-gradient(135deg,#272040,#322a50);border-color:rgba(167,139,250,.5)"></div><span class="th-lbl" style="color:#a78bfa">Violet</span></div>
         </div>
       </div>
       <div class="s-card">
@@ -547,7 +521,7 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
         <p style="font-size:12px;color:var(--txt3);line-height:1.65">Built with Chart.js and the Yahoo Finance API. Works offline after the first load.</p>
       </div>
     </div>
-    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.9.3 &nbsp;&middot;&nbsp; 2026</div>
+    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.7.0 &nbsp;&middot;&nbsp; 2026</div>
   </div>
 </div>
 </div>
@@ -559,12 +533,15 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 const PERIODS=[{label:'1W',days:7},{label:'1M',days:30},{label:'3M',days:90},{label:'6M',days:180},{label:'1Y',days:365}];
 const PAL=['tp0','tp1','tp2','tp3','tp4','tp5','tp6','tp7','tp8','tp9','tp10','tp11'];
 const LINE_COLS=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899','#84cc16','#6366f1','#14b8a6','#e11d48'];
-const THEME_LOGO={'light':'candle','dark':'wave','midnight':'candle','forest':'candle','dusk':'wave'};
+const THEME_LOGO={'light':'candle','dark':'wave','midnight':'candle','pro':'sigma','forest':'arc','dusk':'diamond'};
 
 // ── LOGO STYLES ──
 const LOGOS={
   wave:{label:'Wave',mk:()=>`<svg width="22" height="17" viewBox="0 0 22 17" fill="none"><polyline points="0,13 4,8 8,10 12,4 17,2 22,1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="0" y1="17" x2="22" y2="17" stroke="currentColor" stroke-width="1" opacity="0.35"/></svg>`},
   candle:{label:'Candle',mk:()=>`<svg width="18" height="22" viewBox="0 0 18 22" fill="none"><line x1="4.5" y1="1" x2="4.5" y2="4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="1" y="4" width="7" height="8" rx="1.2" fill="currentColor"/><line x1="4.5" y1="12" x2="4.5" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="13.5" y1="5" x2="13.5" y2="8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="10" y="8" width="7" height="9" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="17" x2="13.5" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`},
+  diamond:{label:'Diamond',mk:()=>`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polygon points="10,1 19,8.5 10,19 1,8.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><line x1="1" y1="8.5" x2="19" y2="8.5" stroke="currentColor" stroke-width="1" opacity="0.4"/><line x1="10" y1="1" x2="10" y2="19" stroke="currentColor" stroke-width="1" opacity="0.2"/></svg>`},
+  sigma:{label:'Sigma',mk:()=>`<svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M16 2H3l6.5 8L3 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`},
+  arc:{label:'Arc',mk:()=>`<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2,17 A10,10 0 1,1 20,17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="11" y1="11" x2="16.5" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="1.8" fill="currentColor"/></svg>`},
 };
 
 // ── STATE ──
@@ -616,181 +593,76 @@ function buildLogoOpts(){
 }
 // Apply saved theme immediately (sync, before any rendering)
 (()=>{
-  const VALID_THEMES=['light','midnight','forest','dusk'];
-  const stored=localStorage.getItem('tj_theme');
-  // If stored theme is invalid (e.g. 'dark'/'pro'/'steel' from old version), reset to light
-  const t=(stored&&VALID_THEMES.includes(stored))?stored:'light';
-  if(stored&&!VALID_THEMES.includes(stored)) localStorage.setItem('tj_theme','light');
+  const t=localStorage.getItem('tj_theme')||'light';
   document.documentElement.setAttribute('data-theme',t);
   renderLogo();
+  // Mark active theme swatch — elements exist in DOM even if panel is hidden
   document.querySelectorAll('.th-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===t));
 })();
 
+// ── IndexedDB ──
+let _idb=null;
+async function openIDB(){if(_idb)return _idb;return new Promise((a,b)=>{const r=indexedDB.open('TJ3',1);r.onupgradeneeded=e=>e.target.result.createObjectStore('s');r.onsuccess=e=>{_idb=e.target.result;a(_idb);};r.onerror=b;});}
+async function idbSet(k,v){const db=await openIDB();return new Promise((a,b)=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(v,k);tx.oncomplete=a;tx.onerror=b;});}
+async function idbGet(k){const db=await openIDB();return new Promise((a,b)=>{const tx=db.transaction('s','readonly');const r=tx.objectStore('s').get(k);r.onsuccess=()=>a(r.result);r.onerror=b;});}
 
-// ── TAG CATEGORY SYSTEM ──────────────────────────────────────────────
-// Tags get consistent colour and sort order based on their category.
-// Sort priority: Source → Entry-type → Region → Cap → Risk → Sector → Conviction → Analyst name → Other
-
-const TAG_CAT_MAP = {
-  // Source — who suggested it
-  source:     { pat: t => /^#suggested-by-/.test(t),            css:'background:#ede9fe;color:#6d28d9;border-color:#c4b5fd' },
-  // Entry signal
-  entry:      { pat: t => ['#dip-buy','#reversal','#breakout','#cluster','#earnings-play','#swing'].includes(t), css:'background:#fef3c7;color:#92400e;border-color:#fcd34d' },
-  // Region
-  region:     { pat: t => ['#us','#eu','#asia','#uk','#em','#global'].includes(t), css:'background:#cffafe;color:#0e7490;border-color:#67e8f9' },
-  // Market cap
-  cap:        { pat: t => ['#large-cap','#mid-cap','#medium-cap','#small-cap','#micro-cap'].includes(t), css:'background:#d1fae5;color:#065f46;border-color:#6ee7b7' },
-  // Risk level — dynamic css
-  risk:       { pat: t => ['#low-risk','#medium-risk','#high-risk'].includes(t),
-                cssFn: t => t==='#low-risk'?'background:#dcfce7;color:#166534;border-color:#86efac':t==='#medium-risk'?'background:#fef3c7;color:#b45309;border-color:#fcd34d':'background:#fee2e2;color:#b91c1c;border-color:#fca5a5' },
-  // Sector
-  sector:     { pat: t => ['#tech','#financials','#healthcare','#energy','#consumer','#industrials','#realestate','#utilities','#materials','#ai','#ev','#semiconductor','#biotech'].includes(t), css:'background:#dbeafe;color:#1d4ed8;border-color:#93c5fd' },
-  // Conviction / status
-  conviction: { pat: t => ['#high-conviction','#speculative','#stop-loss','#thesis-broken','#momentum'].includes(t), css:'background:#fce7f3;color:#be185d;border-color:#f9a8d4' },
-  // Analyst name (tag that appears alongside #suggested-by-analyst) — indigo
-  analyst:    { pat: ()=>false, css:'background:#e0e7ff;color:#3730a3;border-color:#a5b4fc' },
-  // Other / fallback
-  other:      { pat: ()=>true,  css:'background:#f1f5f9;color:#334155;border-color:#cbd5e1' },
-};
-const CAT_ORDER = ['source','entry','region','cap','risk','sector','conviction','analyst','other'];
-
-function isAnalystName(tag){
-  if(/^#suggested-by-/.test(tag)||TAG_CAT_MAP.source.pat(tag)) return false;
-  for(const cat of ['entry','region','cap','risk','sector','conviction']) if(TAG_CAT_MAP[cat].pat(tag)) return false;
-  return trades.some(tr=>tr.tags.includes('#suggested-by-analyst')&&tr.tags.includes(tag)&&tag!=='#suggested-by-analyst');
-}
-function tagCatId(tag){
-  if(/^#suggested-by-/.test(tag)) return 'source';
-  if(isAnalystName(tag)) return 'analyst';
-  for(const [id,def] of Object.entries(TAG_CAT_MAP)){
-    if(id==='analyst'||id==='other') continue;
-    if(def.pat(tag)) return id;
-  }
-  return 'other';
-}
-function tagCss(tag){
-  const id=tagCatId(tag);
-  const def=TAG_CAT_MAP[id]||TAG_CAT_MAP.other;
-  return def.cssFn?def.cssFn(tag):def.css;
-}
-function sortTags(tags){
-  return [...tags].sort((a,b)=>{
-    const oa=CAT_ORDER.indexOf(tagCatId(a));
-    const ob=CAT_ORDER.indexOf(tagCatId(b));
-    if(oa!==ob)return oa-ob;
-    return a.localeCompare(b);
-  });
-}
-function tagHtml(tag){return`<span class="tc2" style="${tagCss(tag)}">${esc(tag)}</span>`;}
-function tCls(t){return '';} // legacy shim — colours now via inline style
-function normTags(t){
-  if(!t)return[];
-  const arr=typeof t==='string'?t.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean):Array.isArray(t)?t.map(x=>String(x).trim()).filter(Boolean):[];
-  return sortTags(arr.map(x=>x.startsWith('#')?x:'#'+x));
-}
-function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return sortTags([...s]);}
-function retroSortAllTags(){trades.forEach(tr=>{tr.tags=sortTags(tr.tags);});}
-function earliest(){const e={};trades.forEach(t=>{const k=t.ticker.toUpperCase();if(!e[k]||t.date<e[k])e[k]=t.date;});return e;}
-
-// ── DATA FETCHING — MULTI-SOURCE, MULTI-PROXY ──────────────────────────────
-// Strategy: try a pool of proxies intelligently; rank by speed on first test;
-// fall back to Stooq.com (CSV) when Yahoo fails entirely.
-
-let fetchStrategy = localStorage.getItem('tj_fetch_strategy') || 'race';
-let proxyRankings = JSON.parse(localStorage.getItem('tj_proxy_rankings') || '[]');
-let proxyRotateIdx = 0;
-
-// All available CORS proxies — ranked by reliability in practice
-const PROXY_POOL = [
-  { name: 'corsproxy.io',      fn: u => `https://corsproxy.io/?url=${encodeURIComponent(u)}` },
-  { name: 'allorigins',        fn: u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}` },
-  { name: 'codetabs',          fn: u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}` },
-  { name: 'cors.sh',           fn: u => `https://proxy.cors.sh/${u}` },
-  { name: 'corsanywhere-demo', fn: u => `https://cors-anywhere.herokuapp.com/${u}` },
-  { name: 'thingproxy',        fn: u => `https://thingproxy.freeboard.io/fetch/${u}` },
-  { name: 'yacdn',             fn: u => `https://yacdn.org/serve/${u}` },
-  { name: 'api.cors.lol',      fn: u => `https://api.cors.lol/?url=${encodeURIComponent(u)}` },
+// ── FETCH STRATEGIES ──
+// fetchStrategy controls how Yahoo Finance data is retrieved.
+// Change in Settings to work around proxy rate limits and failures.
+let fetchStrategy=localStorage.getItem('tj_fetch_strategy')||'race';
+let proxyRotateIdx=0;
+const PROX=[
+  {name:'corsproxy.io', fn:u=>`https://corsproxy.io/?url=${encodeURIComponent(u)}`},
+  {name:'allorigins',   fn:u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`},
+  {name:'codetabs',     fn:u=>`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`},
+  {name:'thingproxy',   fn:u=>`https://thingproxy.freeboard.io/fetch/${u}`},
 ];
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-// Get ordered proxy list: use rankings if available, else default order
-function getOrderedProxies() {
-  if (proxyRankings.length > 0) {
-    const ranked = proxyRankings
-      .map(name => PROXY_POOL.find(p => p.name === name))
-      .filter(Boolean);
-    const rest = PROXY_POOL.filter(p => !proxyRankings.includes(p.name));
-    return [...ranked, ...rest];
-  }
-  return PROXY_POOL;
+async function tryProxy(proxy,url,timeoutMs=12000){
+  const ctrl=new AbortController();
+  const tid=setTimeout(()=>ctrl.abort(),timeoutMs);
+  try{const r=await fetch(proxy.fn(url),{signal:ctrl.signal});clearTimeout(tid);if(!r.ok)throw new Error(`HTTP ${r.status}`);return await r.json();}
+  catch(e){clearTimeout(tid);throw e;}
 }
-
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-async function tryProxy(proxy, url, timeoutMs = 12000) {
-  const ctrl = new AbortController();
-  const tid = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const r = await fetch(proxy.fn(url), { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const text = await r.text();
-    // Some proxies return empty or error HTML
-    if (!text || text.trim().startsWith('<')) throw new Error('Non-JSON response');
-    return JSON.parse(text);
-  } catch(e) { clearTimeout(tid); throw e; }
-}
-
-// ── Race: all proxies fire in parallel with stagger ──
-async function fetchRace(url) {
-  const proxies = getOrderedProxies();
-  for (let attempt = 0; attempt < 2; attempt++) {
-    if (attempt > 0) await sleep(4000);
-    try {
-      return await new Promise((resolve, reject) => {
-        let settled = false, failed = 0;
-        const settle = (v, ok) => { if (settled) return; settled = true; ok ? resolve(v) : reject(v); };
-        proxies.forEach((p, i) => {
-          // Best proxy first; each subsequent one delayed by 1.8s
-          setTimeout(async () => {
-            if (settled) return;
-            try { settle(await tryProxy(p, url, 12000), true); }
-            catch(e) { if (!settled) { failed++; if (failed === proxies.length) settle(new Error('All failed'), false); } }
-          }, i * 1800);
+// Race: all proxies start staggered 2s apart, fastest wins. Quickest but can hammer all proxies at once.
+async function fetchRace(url){
+  for(let attempt=0;attempt<2;attempt++){
+    if(attempt>0)await sleep(4000);
+    try{
+      return await new Promise((resolve,reject)=>{
+        let settled=false,failed=0;
+        const settle=(v,ok)=>{if(settled)return;settled=true;ok?resolve(v):reject(v);};
+        PROX.forEach((p,i)=>{
+          setTimeout(async()=>{if(settled)return;try{settle(await tryProxy(p,url,13000),true);}catch(e){if(!settled){failed++;if(failed===PROX.length)settle(new Error('All failed'),false);}}},i*2000);
         });
-        setTimeout(() => settle(new Error('Timeout'), false), 25000);
+        setTimeout(()=>settle(new Error('Timeout'),false),22000);
       });
-    } catch(e) { if (attempt === 1) throw e; }
+    }catch(e){if(attempt===1)throw e;}
   }
 }
-
-// ── Rotate: round-robin across proxies ──
-async function fetchRotate(url) {
-  const proxies = getOrderedProxies();
-  const start = proxyRotateIdx;
-  proxyRotateIdx = (proxyRotateIdx + 1) % proxies.length;
-  for (let i = 0; i < proxies.length; i++) {
-    try { return await tryProxy(proxies[(start + i) % proxies.length], url, 14000); }
-    catch(e) { if (i < proxies.length - 1) await sleep(1200); }
+// Rotate: each request uses the next proxy in round-robin order. Spreads load evenly.
+async function fetchRotate(url){
+  const start=proxyRotateIdx;proxyRotateIdx=(proxyRotateIdx+1)%PROX.length;
+  for(let i=0;i<PROX.length;i++){
+    try{return await tryProxy(PROX[(start+i)%PROX.length],url,14000);}
+    catch(e){if(i<PROX.length-1)await sleep(1500);}
   }
   throw new Error('All proxies failed');
 }
-
-// ── Patient: sequential, generous timeouts ──
-async function fetchPatient(url) {
-  const proxies = getOrderedProxies();
-  for (let i = 0; i < proxies.length; i++) {
-    try { return await tryProxy(proxies[i], url, 18000); }
-    catch(e) { if (i < proxies.length - 1) await sleep(2500); }
+// Patient: try each proxy one at a time with long timeout. Best when rate-limited.
+async function fetchPatient(url){
+  for(let i=0;i<PROX.length;i++){
+    try{return await tryProxy(PROX[i],url,18000);}
+    catch(e){if(i<PROX.length-1)await sleep(3000);}
   }
   throw new Error('All proxies failed');
 }
+// Throttle: patient + queue enforces only 1 concurrent request. Least stress on proxies.
+async function fetchThrottle(url){return fetchPatient(url);}
 
-// ── Throttle: 1 at a time, patient ──
-async function fetchThrottle(url) { return fetchPatient(url); }
-
-// ── Main dispatch ──
-async function fetchSmart(url) {
-  switch (fetchStrategy) {
+async function fetchSmart(url){
+  switch(fetchStrategy){
     case 'race':     return fetchRace(url);
     case 'rotate':   return fetchRotate(url);
     case 'patient':  return fetchPatient(url);
@@ -798,119 +670,67 @@ async function fetchSmart(url) {
     default:         return fetchRace(url);
   }
 }
-
-// ── Stooq fallback (CSV, no auth needed) ──
-// Stooq ticker format: AAPL.US, MSFT.US, TSLA.US, etc.
-async function fetchStooq(ticker, fromDate) {
-  const k = ticker.toUpperCase();
-  const stooqTicker = k.includes('.') ? k.toLowerCase() : k.toLowerCase() + '.us';
-  const d1 = fromDate.replace(/-/g, '');
-  const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
-  const csvUrl = `https://stooq.com/q/d/l/?s=${stooqTicker}&d1=${d1}&d2=${today}&i=d`;
-  const proxies = getOrderedProxies();
-  for (let i = 0; i < Math.min(proxies.length, 4); i++) {
-    try {
-      const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 12000);
-      const r = await fetch(proxies[i].fn(csvUrl), { signal: ctrl.signal });
-      clearTimeout(tid);
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const csv = await r.text();
-      if (!csv || csv.includes('No data') || csv.trim().startsWith('<')) throw new Error('No CSV data');
-      // Parse CSV: Date,Open,High,Low,Close,Volume
-      const lines = csv.trim().split('\n').slice(1); // skip header
-      const pts = lines.map(l => {
-        const cols = l.split(',');
-        const date = cols[0]?.trim();
-        const close = parseFloat(cols[4]);
-        return date && !isNaN(close) ? { date, close } : null;
-      }).filter(Boolean).sort((a, b) => a.date.localeCompare(b.date));
-      if (pts.length === 0) throw new Error('Empty CSV');
-      return { pts, meta: { name: ticker, currency: 'USD', lastPrice: pts.at(-1)?.close || null } };
-    } catch(e) { if (i < 3) await sleep(1000); }
-  }
-  throw new Error('Stooq also failed');
+async function pingProxies(){
+  const testUrl='https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=1d';
+  const results=await Promise.allSettled(PROX.map(async p=>{const t0=Date.now();await tryProxy(p,testUrl,8000);return{name:p.name,ms:Date.now()-t0};}));
+  return results.map((r,i)=>({name:PROX[i].name,ok:r.status==='fulfilled',ms:r.status==='fulfilled'?r.value.ms:null}));
 }
-
-// ── Full fetch with Yahoo → Stooq fallback ──
-async function fetchWithFallback(url, ticker, fromDate) {
-  try {
-    return parseYahoo(await fetchSmart(url));
-  } catch(yahooErr) {
-    // Try Stooq as fallback
-    try {
-      return await fetchStooq(ticker, fromDate);
-    } catch(stooqErr) {
-      throw new Error(`Yahoo: ${yahooErr.message} | Stooq: ${stooqErr.message}`);
-    }
-  }
+function parseYahoo(j){
+  const res=j?.chart?.result?.[0];if(!res)throw new Error('No data');
+  const ts=res.timestamp||[];const cl=res.indicators?.adjclose?.[0]?.adjclose||res.indicators?.quote?.[0]?.close||[];const m=res.meta||{};
+  const pts=ts.map((t,i)=>({date:tsD(t),close:cl[i]})).filter(d=>d.close!=null&&d.close>0);
+  return{pts,meta:{name:m.longName||m.shortName||m.symbol||''  ,currency:m.currency||'USD',lastPrice:m.regularMarketPrice||pts.at(-1)?.close||null}};
 }
+function tsD(ts){return new Date(ts*1000).toISOString().split('T')[0];}
 
-// ── Proxy speed test ──
-async function pingProxies() {
-  const testUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=5d';
-  const results = await Promise.allSettled(
-    PROXY_POOL.map(async p => {
-      const t0 = Date.now();
-      await tryProxy(p, testUrl, 8000);
-      return { name: p.name, ms: Date.now() - t0 };
-    })
-  );
-  const ranked = results
-    .map((r, i) => ({ name: PROXY_POOL[i].name, ok: r.status === 'fulfilled', ms: r.status === 'fulfilled' ? r.value.ms : null }))
-    .filter(r => r.ok)
-    .sort((a, b) => a.ms - b.ms);
-  // Persist ranking of working proxies
-  proxyRankings = ranked.map(r => r.name);
-  localStorage.setItem('tj_proxy_rankings', JSON.stringify(proxyRankings));
-  return results.map((r, i) => ({ name: PROXY_POOL[i].name, ok: r.status === 'fulfilled', ms: r.status === 'fulfilled' ? r.value.ms : null }));
-}
-
-function parseYahoo(j) {
-  const res = j?.chart?.result?.[0]; if (!res) throw new Error('No data');
-  const ts = res.timestamp || [];
-  const cl = res.indicators?.adjclose?.[0]?.adjclose || res.indicators?.quote?.[0]?.close || [];
-  const m = res.meta || {};
-  const pts = ts.map((t, i) => ({ date: tsD(t), close: cl[i] })).filter(d => d.close != null && d.close > 0);
-  return { pts, meta: { name: m.longName || m.shortName || m.symbol || '', currency: m.currency || 'USD', exchange: m.exchangeName || m.fullExchangeName || '', lastPrice: m.regularMarketPrice || pts.at(-1)?.close || null } };
-}
-function tsD(ts) { return new Date(ts * 1000).toISOString().split('T')[0]; }
-
-class FQ { constructor(n){this.n=n;this.r=0;this.q=[];} add(fn){return new Promise((a,b)=>{this.q.push({fn,a,b});this._r();});} _r(){while(this.r<this.n&&this.q.length){const{fn,a,b}=this.q.shift();this.r++;fn().then(a,b).finally(()=>{this.r--;this._r();}); }}}
-function getConcurrency() { return fetchStrategy === 'throttle' ? 1 : 3; }
+class FQ{constructor(n){this.n=n;this.r=0;this.q=[];}add(fn){return new Promise((a,b)=>{this.q.push({fn,a,b});this._r();});}_r(){while(this.r<this.n&&this.q.length){const{fn,a,b}=this.q.shift();this.r++;fn().then(a,b).finally(()=>{this.r--;this._r();});}}}
+function getConcurrency(){return fetchStrategy==='throttle'?1:3;}
 let fqW=new FQ(getConcurrency()),fqD=new FQ(getConcurrency());
 function rebuildQueues(){fqW=new FQ(getConcurrency());fqD=new FQ(getConcurrency());}
 
-async function fetchW(ticker, fromDate) {
-  const k = ticker.toUpperCase();
-  if (cacheW[k]) return cacheW[k]; // includes failed sentinel
-  const p1 = Math.floor(new Date(fromDate + 'T00:00:00Z').getTime() / 1000);
-  const p2 = Math.floor(Date.now() / 1000) + 86400;
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1wk&period1=${p1}&period2=${p2}`;
-  const d = await fetchWithFallback(yahooUrl, k, fromDate);
-  cacheW[k] = d; return d;
+async function fetchW(ticker,fromDate){
+  const k=ticker.toUpperCase();if(cacheW[k])return cacheW[k];
+  const p1=Math.floor(new Date(fromDate+'T00:00:00Z').getTime()/1000);
+  const p2=Math.floor(Date.now()/1000)+86400;
+  const d=parseYahoo(await fetchSmart(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1wk&period1=${p1}&period2=${p2}`));
+  cacheW[k]=d;return d;
 }
-async function fetchD(ticker, fromDate) {
-  const k = ticker.toUpperCase();
-  if (cacheD[k]) return cacheD[k];
-  const p1 = Math.floor(new Date(fromDate + 'T00:00:00Z').getTime() / 1000);
-  const p2 = Math.floor(Date.now() / 1000) + 86400;
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}&includeAdjustedClose=true`;
-  const d = await fetchWithFallback(yahooUrl, k, fromDate);
-  cacheD[k] = d; return d;
+async function fetchD(ticker,fromDate){
+  const k=ticker.toUpperCase();if(cacheD[k])return cacheD[k];
+  const p1=Math.floor(new Date(fromDate+'T00:00:00Z').getTime()/1000);
+  const p2=Math.floor(Date.now()/1000)+86400;
+  const d=parseYahoo(await fetchSmart(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}&includeAdjustedClose=true`));
+  cacheD[k]=d;return d;
 }
-async function fetchPriceAt(ticker, date) {
-  const k = ticker.toUpperCase();
-  const p1 = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000) - 86400 * 6;
-  const p2 = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000) + 86400 * 10;
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}`;
-  const d = await fetchWithFallback(yahooUrl, k, date);
-  const today = new Date().toISOString().split('T')[0];
-  const target = date > today ? today : date;
-  const pt = d.pts.find(p => p.date >= target) || d.pts.at(-1);
-  return { price: pt?.close || null, name: d.meta.name, currency: d.meta.currency || 'USD', exchange: d.meta.exchange || '' };
+async function fetchPriceAt(ticker,date){
+  const k=ticker.toUpperCase();
+  const p1=Math.floor(new Date(date+'T00:00:00Z').getTime()/1000)-86400*6;
+  const p2=Math.floor(new Date(date+'T00:00:00Z').getTime()/1000)+86400*10;
+  const d=parseYahoo(await fetchSmart(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}`));
+  const today=new Date().toISOString().split('T')[0];const target=date>today?today:date;
+  const pt=d.pts.find(p=>p.date>=target)||d.pts.at(-1);
+  return{price:pt?.close||null,name:d.meta.name,currency:d.meta.currency||'USD'};
 }
 
+// ── HELPERS ──
+function priceAt(pts,td){
+  if(!pts?.length)return null;const today=new Date().toISOString().split('T')[0];if(td>today)return null;
+  const p=pts.find(p=>p.date>=td);if(!p)return pts.at(-1)?.close||null;
+  if(Math.round((new Date(p.date)-new Date(td))/86400000)>15)return null;return p.close;
+}
+function addDays(d,n){const dt=new Date(d+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+n);return dt.toISOString().split('T')[0];}
+function pctRet(ep,cp){if(!ep||!cp)return null;return(cp-ep)/ep*100;}
+function ttg(tradeDate,days){const diff=Math.ceil((new Date(tradeDate+'T12:00:00Z').getTime()+days*86400000-Date.now())/86400000);if(diff<=0)return null;return diff<14?diff+'d':Math.ceil(diff/7)+'w';}
+function fp(v,c='USD'){if(v==null||isNaN(v))return'—';const s={USD:'$',EUR:'€',GBP:'£',JPY:'¥',CHF:'Fr',CAD:'C$',AUD:'A$'};return(s[c]||'$')+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fps(v,c='USD'){if(v==null||isNaN(v))return'—';const s={USD:'$',EUR:'€',GBP:'£'};if(Math.abs(v)>=1000)return(s[c]||'$')+(v/1000).toFixed(1)+'k';return(s[c]||'$')+v.toFixed(0);}
+function fd(s){if(!s)return'—';return new Date(s+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function showT(m,t=''){const el=document.getElementById('toast');el.textContent=m;el.className='toast on'+(t?' '+t:'');clearTimeout(el._x);el._x=setTimeout(()=>{el.className='toast';},3200);}
+function tCls(t){let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return PAL[h%PAL.length];}
+function tagHtml(t){return`<span class="tc2 ${tCls(t)}">${esc(t)}</span>`;}
+function normTags(t){if(!t)return[];if(typeof t==='string')return t.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);if(Array.isArray(t))return t.map(x=>String(x).trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);return[];}
+function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return[...s].sort();}
+function earliest(){const e={};trades.forEach(t=>{const k=t.ticker.toUpperCase();if(!e[k]||t.date<e[k])e[k]=t.date;});return e;}
 
 // ── FILE HANDLING ──
 document.getElementById('lbtn').addEventListener('click', () => hasFSA ? pickFSA() : document.getElementById('fi').click());
@@ -924,36 +744,17 @@ upz.addEventListener('drop', e => { e.preventDefault(); upz.classList.remove('dr
 // Example + blank file generators
 document.getElementById('dl-example-btn').addEventListener('click', () => {
   const example = [
-    {"ticker":"AAPL","date":"2024-06-12","action":"buy","shares":10,"price":207.15,"tags":["#US","#tech","#large-cap","#dip-buy","#low-risk"],"reason":"Post-WWDC dip. AI features in iOS 18 are underpriced by market. Services compounding."},
-    {"ticker":"MSFT","date":"2024-06-20","action":"buy","shares":5,"price":445.80,"tags":["#US","#tech","#large-cap","#suggested-by-me","#low-risk"],"reason":"Azure growth re-accelerating. Copilot seat additions ahead of expectations."},
-    {"ticker":"NVDA","date":"2024-07-08","action":"buy","shares":6,"price":117.93,"tags":["#US","#tech","#large-cap","#suggested-by-analyst","#high-risk"],"reason":"Blackwell ramp imminent. Data center AI capex cycle has years to run."},
-    {"ticker":"JPM","date":"2024-07-15","action":"buy","shares":8,"price":212.50,"tags":["#US","#financials","#large-cap","#suggested-by-me","#low-risk"],"reason":"Rate environment favors net interest margin. Trading revenue strong. Defensive position."},
-    {"ticker":"BRK-B","date":"2024-07-22","action":"buy","shares":4,"price":368.40,"tags":["#US","#financials","#large-cap","#suggested-by-me","#low-risk"],"reason":"Berkshire's cash pile at record high — optionality in a volatile market. Buffett discount."},
-    {"ticker":"AMZN","date":"2024-08-05","action":"buy","shares":7,"price":176.25,"tags":["#US","#tech","#large-cap","#dip-buy","#medium-risk"],"reason":"August flash-crash dip. AWS growth plus retail margin expansion story intact."},
-    {"ticker":"GOOGL","date":"2024-08-19","action":"buy","shares":8,"price":166.40,"tags":["#US","#tech","#large-cap","#suggested-by-friend","#medium-risk"],"reason":"Search is holding vs AI overviews. YouTube and Cloud both accelerating."},
-    {"ticker":"ASML","date":"2024-09-03","action":"buy","shares":2,"price":875.30,"tags":["#EU","#tech","#large-cap","#suggested-by-analyst","#medium-risk"],"reason":"EUV monopoly irreplaceable for sub-3nm. China export headwinds already priced in."},
-    {"ticker":"META","date":"2024-09-16","action":"buy","shares":4,"price":556.70,"tags":["#US","#tech","#large-cap","#suggested-by-friend","#medium-risk"],"reason":"Ad monetisation inflecting with Llama-powered targeting. Threads growing quietly."},
-    {"ticker":"V","date":"2024-09-30","action":"buy","shares":5,"price":277.60,"tags":["#US","#financials","#large-cap","#suggested-by-me","#low-risk"],"reason":"Payment volumes resilient. International growth strong. Durable compounder."},
-    {"ticker":"SMCI","date":"2024-10-07","action":"buy","shares":15,"price":52.40,"tags":["#US","#tech","#mid-cap","#dip-buy","#high-risk"],"reason":"AI server demand real but accounting concerns overblown short-term. Speculative position."},
-    {"ticker":"TSLA","date":"2024-10-21","action":"buy","shares":6,"price":217.80,"tags":["#US","#tech","#large-cap","#suggested-by-friend","#high-risk"],"reason":"Robotaxi event catalyst. FSD improvement trajectory underappreciated."},
-    {"ticker":"SMCI","date":"2024-11-04","action":"sell","shares":15,"price":24.70,"tags":["#US","#tech","#mid-cap","#high-risk"],"reason":"Auditor resignation. Thesis broken — accounting risk too high. Cutting losses quickly."},
-    {"ticker":"UNH","date":"2024-11-11","action":"buy","shares":3,"price":595.20,"tags":["#US","#financials","#large-cap","#suggested-by-analyst","#low-risk"],"reason":"Healthcare spending inelastic. Optum growing fast. Defensive compounder on dip."},
-    {"ticker":"SAP","date":"2024-11-25","action":"buy","shares":3,"price":261.40,"tags":["#EU","#tech","#large-cap","#suggested-by-me","#medium-risk"],"reason":"Cloud transition accelerating. RISE with SAP customer lock-in strong. Steady grower."},
-    {"ticker":"NVDA","date":"2024-12-09","action":"sell","shares":3,"price":138.85,"tags":["#US","#tech","#large-cap","#high-risk"],"reason":"Trimming half position after 18% run. Locking in gains, keeping core holding."},
-    {"ticker":"ORCL","date":"2025-01-06","action":"buy","shares":6,"price":188.90,"tags":["#US","#tech","#large-cap","#dip-buy","#suggested-by-analyst","#medium-risk"],"reason":"Cloud database wins accelerating. AI infrastructure contracts with hyperscalers increasing."},
-    {"ticker":"SCHW","date":"2025-01-20","action":"buy","shares":10,"price":79.15,"tags":["#US","#financials","#mid-cap","#dip-buy","#medium-risk"],"reason":"Rate sensitivity creates entry. Cash sorting headwind ending. Long-term market share story."},
-    {"ticker":"ASML","date":"2025-02-10","action":"sell","shares":2,"price":742.50,"tags":["#EU","#tech","#large-cap","#medium-risk"],"reason":"Dutch export controls worsening. Thesis partially impaired — full exit at loss, capital redeployment."},
-    {"ticker":"PLTR","date":"2025-02-24","action":"buy","shares":20,"price":82.30,"tags":["#US","#tech","#mid-cap","#suggested-by-friend","#high-risk"],"reason":"AIP platform winning large enterprise contracts. Government pipeline strong. High valuation risk."}
+    {"ticker":"AAPL","date":"2024-09-20","action":"buy","shares":10,"price":220.69,"tags":["#US","#tech","#large-cap"],"reason":"Post-iPhone 16 dip. AI in iOS 18 is a multi-year unlock. Buying the fear."},
+    {"ticker":"NVDA","date":"2024-10-14","action":"buy","shares":5,"price":131.60,"tags":["#US","#AI","#high-conviction"],"reason":"Blackwell GPU demand exceeds supply through 2025. No real CUDA competitor for 2+ years."},
+    {"ticker":"MSFT","date":"2024-11-05","action":"buy","shares":4,"price":422.00,"tags":["#US","#tech","#AI"],"reason":"Post-earnings pullback. Copilot monetisation intact. Adding on dip below 52W trend."},
+    {"ticker":"INTC","date":"2024-10-30","action":"sell","shares":20,"price":22.50,"tags":["#US","#stop-loss","#thesis-broken"],"reason":"Cutting losses. Foundry ambitions years behind schedule. No clear catalyst."}
   ];
   downloadJSON(example, 'trades-example.json');
   showT('Example file downloaded', 'ok');
 });
 document.getElementById('start-blank-btn').addEventListener('click', () => {
-  const starter = [{"ticker":"AAPL","date":new Date().toISOString().split('T')[0],"action":"buy","shares":1,"price":0,"tags":["#suggested-by-me"],"reason":"My first trade entry. Update the ticker, date, shares and price, then add your reason."}];
-  // Use today's date dynamically
-  starter[0].date = new Date().toISOString().split('T')[0];
-  downloadJSON(starter, 'trades.json');
-  showT('Starter trades.json downloaded — edit it and load here', 'ok');
+  downloadJSON([], 'trades.json');
+  showT('Blank trades.json downloaded — load it here to start', 'ok');
 });
 function downloadJSON(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -983,10 +784,10 @@ function readFile(file){
   fileName=file.name;const r=new FileReader();
   r.onload=e=>{
     try{
-      const p=JSON.parse(e.target.result);if(!Array.isArray(p))throw new Error('Invalid JSON: expected an array');
+      const p=JSON.parse(e.target.result);if(!Array.isArray(p)||!p.length)throw new Error('Invalid JSON array');
       trades=p.map((t,i)=>({...t,id:i,tags:normTags(t.tags),_pp:null,_cp:null}));
       cacheW={};cacheD={};chartsBuilt=false;ovBuilt=false;
-      retroSortAllTags();showT(`✓ ${trades.length} trades`,'ok');updateFileInfo();showApp();switchTab('overview',true);
+      showT(`✓ ${trades.length} trades`,'ok');updateFileInfo();showApp();switchTab('overview',true);
     }catch(e){showT('Parse error: '+e.message,'err');}
   };
   r.readAsText(file);
@@ -1009,7 +810,6 @@ function switchTab(tab,force=false){
     else{renderRet();refreshOvSum();} // always re-render; prevents stale spinners
   }
   if(tab==='charts'){if(!chartsBuilt||force)buildChartsTab();else updateOptExit();}
-  if(tab==='strategy')buildStrategyTab(false);
   if(tab==='newtrade')buildNTTab();
   if(tab==='settings')buildSettingsTab();
 }
@@ -1135,27 +935,22 @@ function buildRetRow(tr){
   const isSell=tr.action.toLowerCase()==='sell';
   const pts=cacheW[tr.ticker.toUpperCase()]?.pts;const tpts=pts?pts.filter(p=>p.date>=tr.date):null;
   const ep=tr.price||(tpts?.[0]?.close);const cur=tr.currency||cacheW[tr.ticker.toUpperCase()]?.meta?.currency||'USD';
-  const cached = cacheW[tr.ticker.toUpperCase()];
-  const loading = !cached;           // not yet attempted
-  const fetchFailed = cached?.failed; // attempted but all sources failed
-  const nm = cached?.meta?.name || '';
-  const pcs = PERIODS.map(p => {
-    const t = ttg(tr.date, p.days); if (t) return `<td><span class="ret-cell ttg">⏱ ${t}</span></td>`;
-    if (loading) return `<td><span class="ret-cell loading"><div class="sp-sm"></div></span></td>`;
-    if (fetchFailed) return `<td><span class="ret-cell na">⚠ <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
-    const cp = priceAt(tpts, addDays(tr.date, p.days));
-    if (!cp) return `<td><span class="ret-cell na">n/a <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
-    let r = pctRet(ep, cp); if (r === null) return `<td><span class="ret-cell na">—</span></td>`; if (isSell) r = -r;
-    return `<td><span class="ret-cell ${r >= 0 ? 'pos' : 'neg'}">${(r >= 0 ? '+' : '') + r.toFixed(2)}%</span></td>`;
+  const loading=!pts;const nm=cacheW[tr.ticker.toUpperCase()]?.meta?.name||'';
+  const pcs=PERIODS.map(p=>{
+    const t=ttg(tr.date,p.days);if(t)return`<td><span class="ret-cell ttg">⏱ ${t}</span></td>`;
+    if(loading)return`<td><span class="ret-cell loading"><div class="sp-sm"></div></span></td>`;
+    const cp=priceAt(tpts,addDays(tr.date,p.days));
+    if(!cp)return`<td><span class="ret-cell na">n/a <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
+    let r=pctRet(ep,cp);if(r===null)return`<td><span class="ret-cell na">—</span></td>`;if(isSell)r=-r;
+    return`<td><span class="ret-cell ${r>=0?'pos':'neg'}">${(r>=0?'+':'')+r.toFixed(2)}%</span></td>`;
   }).join('');
   let tc;
   const todayStr = new Date().toISOString().split('T')[0];
   const isToday = tr.date === todayStr;
-  if (isToday) tc = `<td><span class="ret-cell ttg" title="Trade made today — return not yet meaningful">⏱ today</span></td>`;
-  else if (loading) tc = `<td><span class="ret-cell loading"><div class="sp-sm"></div></span></td>`;
-  else if (fetchFailed) tc = `<td><span class="ret-cell na">⚠ <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
-  else if (tr._pp === null) tc = `<td><span class="ret-cell na">n/a <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
-  else { const d = isSell ? -tr._pp : tr._pp; tc = `<td><span class="ret-cell ${d >= 0 ? 'pos' : 'neg'}">${(d >= 0 ? '+' : '') + d.toFixed(2)}%</span></td>`; }
+  if(isToday) tc=`<td><span class="ret-cell ttg" title="Trade made today — return not yet meaningful">⏱ today</span></td>`;
+  else if(loading)tc=`<td><span class="ret-cell loading"><div class="sp-sm"></div></span></td>`;
+  else if(tr._pp===null)tc=`<td><span class="ret-cell na">n/a <button class="ret-retry" onclick="retryTk('${esc(tr.ticker)}')">↺</button></span></td>`;
+  else{const d=isSell?-tr._pp:tr._pp;tc=`<td><span class="ret-cell ${d>=0?'pos':'neg'}">${(d>=0?'+':'')+d.toFixed(2)}%</span></td>`;}
   return`<tr><td style="font-family:var(--mono);font-size:11px;white-space:nowrap;color:var(--txt3)">${fd(tr.date)}</td>
     <td><div class="tk-col">${esc(tr.ticker.toUpperCase())}</div>${nm?`<div style="font-family:var(--mono);font-size:9px;color:var(--txt3);margin-top:1px">${esc(nm)}</div>`:''}</td>
     <td><span class="ab ${tr.action.toLowerCase()}" style="font-size:9px">${tr.action.toUpperCase()}</span></td>
@@ -1163,47 +958,30 @@ function buildRetRow(tr){
     ${pcs}${tc}<td style="white-space:nowrap">${tr.tags.map(tagHtml).join(' ')||'—'}</td>
     <td><button class="btn btn-xs" onclick="retryTk('${esc(tr.ticker)}')">↺</button></td></tr>`;
 }
-async function retryTk(ticker) {
-  const k = ticker.toUpperCase();
-  delete cacheW[k]; // clear both cache and any failed sentinel
-  trades.filter(t => t.ticker.toUpperCase() === k).forEach(t => { t._pp = null; t._cp = null; });
-  renderRet();
-  const ea = earliest();
-  try {
-    const d = await fetchW(k, ea[k] || '2020-01-01');
-    trades.filter(t => t.ticker.toUpperCase() === k).forEach(t => applyW(t, d));
-    renderRet(); refreshOvSum(); showT(`✓ ${k}`, 'ok');
-  } catch(e) {
-    if (!cacheW[k]) cacheW[k] = { pts: [], meta: { name: '', currency: 'USD' }, failed: true };
-    renderRet(); showT(`Failed: ${k}`, 'err');
-  }
+async function retryTk(ticker){
+  const k=ticker.toUpperCase();delete cacheW[k];trades.filter(t=>t.ticker.toUpperCase()===k).forEach(t=>{t._pp=null;t._cp=null;});renderRet();
+  const ea=earliest();
+  try{const d=await fetchW(k,ea[k]||'2020-01-01');trades.filter(t=>t.ticker.toUpperCase()===k).forEach(t=>applyW(t,d));renderRet();refreshOvSum();showT(`✓ ${k}`,'ok');}
+  catch(e){showT(`Failed: ${k}`,'err');}
 }
 function applyW(tr,data){
   const tpts=data.pts.filter(p=>p.date>=tr.date);if(!tpts.length)return;
   const ep=tr.price||tpts[0].close;tr._cp=tpts.at(-1).close;tr._pp=ep?((tr._cp-ep)/ep)*100:null;
 }
-function fetchAllW() {
-  const ea = earliest();
-  const tks = Object.keys(ea).filter(k => !cacheW[k]);
-  if (!tks.length) { renderRet(); refreshOvSum(); return; }
-  let ld = 0;
-  setPB(0); showLS(`0 / ${tks.length}`);
-  tks.forEach((tk, i) => {
-    fqW.add(async () => {
-      if (fetchStrategy === 'race' && i > 0) await sleep(i * 300);
-      if (fetchStrategy === 'throttle') await sleep(i * 1200);
-      try {
-        const d = await fetchW(tk, ea[tk]);
-        trades.filter(t => t.ticker.toUpperCase() === tk).forEach(t => applyW(t, d));
-      } catch(e) {
-        // CRITICAL: store a failed sentinel so rows show "failed" not infinite spinner
-        if (!cacheW[tk]) cacheW[tk] = { pts: [], meta: { name: '', currency: 'USD' }, failed: true };
-      }
-      finally {
-        ld++;
-        setPB((ld / tks.length) * 100); setLST(`${ld} / ${tks.length}`);
-        renderRet(); refreshOvSum();
-        if (ld === tks.length) setTimeout(() => { hideLS(); setPB(0); }, 1200);
+function fetchAllW(){
+  const ea=earliest();const tks=Object.keys(ea).filter(k=>!cacheW[k]);
+  if(!tks.length){renderRet();refreshOvSum();return;}
+  let ld=0;setPB(0);showLS(`0 / ${tks.length}`);
+  tks.forEach((tk,i)=>{
+    fqW.add(async()=>{
+      if(fetchStrategy==='race'&&i>0) await sleep(i*300);
+      if(fetchStrategy==='throttle') await sleep(i*1200);
+      try{const d=await fetchW(tk,ea[tk]);trades.filter(t=>t.ticker.toUpperCase()===tk).forEach(t=>applyW(t,d));}catch(e){}
+      finally{
+        ld++;setPB((ld/tks.length)*100);setLST(`${ld} / ${tks.length}`);
+        // Always re-render — never guard by visibility; stale spinners are the bug
+        renderRet();refreshOvSum();
+        if(ld===tks.length)setTimeout(()=>{hideLS();setPB(0);},1200);
       }
     });
   });
@@ -1364,7 +1142,7 @@ function updateOptExit(){
   const sub=document.getElementById('opt-sub');
   const tagLbl=cTag==='__all__'?'all tags':cTag;
   const modeLabel=optMode==='tall'?'tall view':'dual-axis view';
-  if(sub)sub.textContent=`${avail.length} trades · ${tagLbl} · ${modeLabel}`;
+  if(sub)sub.textContent=`% return vs days held — ${avail.length} buy trades · ${tagLbl} · ${modeLabel}`;
   const indivDatasets=[];const peaks=[];
   avail.forEach((tr,i)=>{
     const k=tr.ticker.toUpperCase();const pts=(cacheD[k]||cacheW[k])?.pts||[];
@@ -1374,7 +1152,7 @@ function updateOptExit(){
     const data=tpts.map(p=>{const day=Math.round((new Date(p.date)-new Date(tr.date))/86400000);const pct=((p.close-ep)/ep)*100;if(pct>maxPct){maxPct=pct;maxDay=day;}return{x:day,y:parseFloat(pct.toFixed(2))};});
     const col=LINE_COLS[i%LINE_COLS.length];
     const ds={label:tr.ticker.toUpperCase(),data,borderColor:col+'55',backgroundColor:'transparent',borderWidth:1.2,pointRadius:0,tension:0.25,order:1};
-    if(optMode==='dual') ds.yAxisID='y2';
+    if(optMode==='dual') ds.yAxisID='y';
     indivDatasets.push(ds);
     peaks.push({ticker:tr.ticker.toUpperCase(),maxDay,maxPct});
   });
@@ -1387,7 +1165,7 @@ function updateOptExit(){
   }).filter(Boolean);
   const avgColor=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#7b8fff';
   const avgDs={label:'Average',data:avgData,borderColor:avgColor,backgroundColor:'transparent',borderWidth:2.8,pointRadius:0,tension:0.3,order:0,z:10};
-  if(optMode==='dual') avgDs.yAxisID='y';
+  if(optMode==='dual') avgDs.yAxisID='y2';
   const datasets=[...indivDatasets,avgDs];
   const avgPeakDay=Math.round(peaks.reduce((s,p)=>s+p.maxDay,0)/peaks.length);
   const avgPeakPct=peaks.reduce((s,p)=>s+p.maxPct,0)/peaks.length;
@@ -1404,413 +1182,40 @@ function updateOptExit(){
     // Compute avg range for tighter y2 axis
     const avgVals=avgData.map(p=>p.y);
     const aMin=Math.min(...avgVals),aMax=Math.max(...avgVals);
-    const aPad=(aMax-aMin)*0.1||2;
+    const aPad=(aMax-aMin)*0.3||5;
     scales={
       x:sharedX,
-      y:{position:'left',title:{display:true,text:'Avg %',font:{family:'DM Mono',size:9},color:avgColor},grid:{color:'rgba(150,150,150,0.05)'},min:aMin-aPad,max:aMax+aPad,ticks:{...sharedYTicks,color:avgColor,maxTicksLimit:5},border:{display:false}},
-      y2:{position:'right',title:{display:true,text:'Individual %',font:{family:'DM Mono',size:9},color:'rgba(150,150,150,0.55)'},grid:{drawOnChartArea:false},ticks:{...sharedYTicks,color:'rgba(150,150,150,0.45)',maxTicksLimit:4},border:{display:false}}
+      y:{position:'left',title:{display:true,text:'Individual %',font:{family:'DM Mono',size:9},color:'rgba(150,150,150,0.6)'},grid:{color:'rgba(150,150,150,0.04)'},ticks:{...sharedYTicks,color:'rgba(150,150,150,0.5)',maxTicksLimit:4},border:{display:false}},
+      y2:{position:'right',title:{display:true,text:'Avg %',font:{family:'DM Mono',size:9},color:avgColor},grid:{drawOnChartArea:false},min:aMin-aPad,max:aMax+aPad,ticks:{...sharedYTicks,color:avgColor,maxTicksLimit:5},border:{display:false}}
     };
   }else{
-    // Tight y-limits based on actual data range
-    const allVals=indivDatasets.flatMap(d=>d.data.map(p=>p.y));
-    const yMin=Math.min(...allVals),yMax=Math.max(...allVals);
-    const yPad=(yMax-yMin)*0.08||2;
-    scales={x:sharedX,y:{title:{display:true,text:'% return',font:{family:'DM Mono',size:9},color:'#6878a0'},position:'right',min:yMin-yPad,max:yMax+yPad,grid:{color:'rgba(150,150,150,0.06)'},ticks:sharedYTicks,border:{display:false}}};
+    scales={x:sharedX,y:{title:{display:true,text:'% return',font:{family:'DM Mono',size:9},color:'#6878a0'},position:'right',grid:{color:'rgba(150,150,150,0.06)'},ticks:sharedYTicks,border:{display:false}}};
   }
   optChart=new Chart(cv,{type:'line',data:{datasets},options:{responsive:true,maintainAspectRatio:false,animation:{duration:500},parsing:false,
     interaction:{mode:'index',intersect:false},
     plugins:{
       legend:{display:datasets.length<=9,position:'bottom',labels:{font:{family:'DM Mono',size:9},boxWidth:12,padding:8,color:'#6878a0',filter:item=>item.label==='Average'||datasets.length<=8}},
       tooltip:{backgroundColor:'rgba(13,17,35,.95)',borderColor:'rgba(255,255,255,.1)',borderWidth:1,titleColor:'#8896aa',bodyColor:'#d0d9f0',padding:8,titleFont:{family:'DM Mono',size:10},bodyFont:{family:'DM Mono',size:11},callbacks:{label:i=>`${i.dataset.label}: ${i.parsed.y>=0?'+':''}${i.parsed.y.toFixed(2)}%`}},
-      annotation:{annotations:{avgLine:{type:'line',xMin:avgPeakDay,xMax:avgPeakDay,borderColor:'rgba(212,168,67,0.55)',borderWidth:1.5,borderDash:[6,4],label:{display:true,content:`Optimal exit: day ${avgPeakDay} (+${avgPeakPct.toFixed(1)}%)`,position:'start',yAdjust:-18,backgroundColor:'rgba(212,168,67,.12)',color:'#d4a843',font:{family:'DM Mono',size:11,weight:'600'},padding:{x:5,y:2},borderRadius:4}}}}
+      annotation:{annotations:{avgLine:{type:'line',xMin:avgPeakDay,xMax:avgPeakDay,borderColor:'rgba(212,168,67,0.55)',borderWidth:1.5,borderDash:[6,4],label:{display:true,content:`Avg peak: d${avgPeakDay}`,position:'start',yAdjust:-16,backgroundColor:'rgba(212,168,67,.1)',color:'#d4a843',font:{family:'DM Mono',size:9},padding:{x:5,y:2},borderRadius:4}}}}
     },
     scales
   }});
+  const ins=document.getElementById('opt-insight');
+  if(ins)ins.innerHTML=`📌 <strong>Avg optimal exit:</strong> day ${avgPeakDay} (+${avgPeakPct.toFixed(2)}%) &nbsp;·&nbsp; <strong>Best:</strong> ${best.ticker} peaked day ${best.maxDay} (+${best.maxPct.toFixed(2)}%) &nbsp;·&nbsp; ${peaks.length} trades`;
 }
-function fetchAllD() {
-  const ea = earliest();
-  const tks = Object.keys(ea).filter(k => !cacheD[k]);
-  if (!tks.length) { updateChSum(); updateOptExit(); return; }
-  let ld = 0; setPB(0); showLS(`0 / ${tks.length} (charts)`);
-  tks.forEach((tk, i) => {
-    fqD.add(async () => {
-      if (fetchStrategy === 'race' && i > 0) await sleep(i * 300);
-      if (fetchStrategy === 'throttle') await sleep(i * 1200);
-      try {
-        const d = await fetchD(tk, ea[tk]);
-        trades.filter(t => t.ticker.toUpperCase() === tk).forEach(tr => applyD(tr, d));
-      } catch(e) {
-        if (!cacheD[tk]) cacheD[tk] = { pts: [], meta: { name: '', currency: 'USD' }, failed: true };
-        trades.filter(t => t.ticker.toUpperCase() === tk).forEach(tr => showCErr(tr, e.message || 'Failed'));
-      }
-      finally {
-        ld++; setPB((ld / tks.length) * 100); setLST(`${ld} / ${tks.length}`);
-        if (ld === tks.length) setTimeout(() => { hideLS(); setPB(0); updateOptExit(); }, 1200);
-      }
+function fetchAllD(){
+  const ea=earliest();const tks=Object.keys(ea).filter(k=>!cacheD[k]);
+  if(!tks.length){updateChSum();updateOptExit();return;}
+  let ld=0;setPB(0);showLS(`0 / ${tks.length} (charts)`);
+  tks.forEach((tk,i)=>{
+    fqD.add(async()=>{
+      if(i>0)await sleep(i*300);
+      try{const d=await fetchD(tk,ea[tk]);trades.filter(t=>t.ticker.toUpperCase()===tk).forEach(tr=>applyD(tr,d));}
+      catch(e){trades.filter(t=>t.ticker.toUpperCase()===tk).forEach(tr=>showCErr(tr,e.message||'Failed'));}
+      finally{ld++;setPB((ld/tks.length)*100);setLST(`${ld} / ${tks.length}`);if(ld===tks.length)setTimeout(()=>{hideLS();setPB(0);updateOptExit();},1200);}
     });
   });
 }
-
-// ── STRATEGY ANALYSIS TAB ──
-let stratView = 'tags';    // 'tags' | 'combos' | 'optimize'
-let stratMetric = 'return'; // 'return' | 'winrate' | 'sharpe'
-let stratChart = null;
-
-document.addEventListener('click', e => {
-  const vb = e.target.closest('[data-sview]');
-  if (vb) {
-    document.querySelectorAll('[data-sview]').forEach(x => x.classList.remove('a-s','active'));
-    vb.classList.add('a-s','active'); stratView = vb.dataset.sview;
-    renderStratTab(); return;
-  }
-  const mb = e.target.closest('[data-smetric]');
-  if (mb) {
-    document.querySelectorAll('[data-smetric]').forEach(x => x.classList.remove('a-all','active'));
-    mb.classList.add('a-all','active'); stratMetric = mb.dataset.smetric;
-    renderStratTab();
-  }
-});
-
-function buildStrategyTab(force=false) {
-  // Ensure By Tag is active on every open
-  stratView = stratView || 'tags';
-  document.querySelectorAll('[data-sview]').forEach(b => {
-    b.classList.toggle('a-s', b.dataset.sview === stratView);
-    b.classList.toggle('active', b.dataset.sview === stratView);
-  });
-  document.querySelectorAll('[data-smetric]').forEach(b => {
-    b.classList.toggle('a-all', b.dataset.smetric === stratMetric);
-    b.classList.toggle('active', b.dataset.smetric === stratMetric);
-  });
-  buildStratSummary();
-  renderStratTab();
-}
-
-function buildStratSummary() {
-  const bar = document.getElementById('strat-sum-bar');
-  if (!bar) return;
-  const loaded = trades.filter(t => t._pp != null);
-  const allT = getAllTags();
-  bar.innerHTML = `
-    <div class="sum-card"><div class="sl">Trades with Data</div><div class="sv">${loaded.length} / ${trades.length}</div><div class="ss">used for analysis</div></div>
-    <div class="sum-card"><div class="sl">Unique Tags</div><div class="sv">${allT.length}</div><div class="ss">across all trades</div></div>
-    <div class="sum-card"><div class="sl">Best Tag Strategy</div><div class="sv pos" id="ss-best-tag">—</div><div class="ss" id="ss-best-ret">—</div></div>
-    <div class="sum-card"><div class="sl">Worst Tag Strategy</div><div class="sv neg" id="ss-worst-tag">—</div><div class="ss" id="ss-worst-ret">—</div></div>
-    <div class="sum-card"><div class="sl">Optimal Combo</div><div class="sv" id="ss-combo" style="font-size:13px">—</div><div class="ss" id="ss-combo-ret">—</div></div>
-  `;
-  // Compute best/worst for summary
-  const tagStats = computeTagStats();
-  const sorted = tagStats.filter(s => s.count >= 2).sort((a, b) => b.score - a.score);
-  if (sorted.length) {
-    const best = sorted[0], worst = sorted.at(-1);
-    const bEl = document.getElementById('ss-best-tag'), wEl = document.getElementById('ss-worst-tag');
-    if (bEl) bEl.textContent = best.tag;
-    if (document.getElementById('ss-best-ret')) document.getElementById('ss-best-ret').textContent = `${(best.avgRet >= 0 ? '+' : '')}${best.avgRet.toFixed(1)}% avg · ${best.winRate.toFixed(0)}% win`;
-    if (wEl) wEl.textContent = worst.tag;
-    if (document.getElementById('ss-worst-ret')) document.getElementById('ss-worst-ret').textContent = `${(worst.avgRet >= 0 ? '+' : '')}${worst.avgRet.toFixed(1)}% avg · ${worst.winRate.toFixed(0)}% win`;
-  }
-  // Best combo
-  const combos = computeCombos(2, 4);
-  const bestCombo = combos.sort((a, b) => b.score - a.score)[0];
-  if (bestCombo && document.getElementById('ss-combo')) {
-    document.getElementById('ss-combo').textContent = bestCombo.tags.join(' ');
-    document.getElementById('ss-combo-ret').textContent = `${(bestCombo.avgRet >= 0 ? '+' : '')}${bestCombo.avgRet.toFixed(1)}% · n=${bestCombo.count}`;
-  }
-}
-
-// ── Core stats functions ──
-function computeTagStats() {
-  const map = {};
-  trades.forEach(tr => {
-    if (tr._pp == null) return;
-    const ret = tr.action.toLowerCase() === 'sell' ? -tr._pp : tr._pp;
-    const days = Math.round((Date.now() - new Date(tr.date)) / 86400000);
-    tr.tags.forEach(tag => {
-      if (!map[tag]) map[tag] = { tag, rets: [], wins: 0, count: 0, days: [] };
-      map[tag].rets.push(ret);
-      map[tag].wins += ret > 0 ? 1 : 0;
-      map[tag].count++;
-      map[tag].days.push(days);
-    });
-  });
-  return Object.values(map).map(s => {
-    const avgRet = s.rets.reduce((a, b) => a + b, 0) / s.rets.length;
-    const winRate = (s.wins / s.count) * 100;
-    const std = Math.sqrt(s.rets.map(r => (r - avgRet) ** 2).reduce((a, b) => a + b, 0) / Math.max(s.rets.length - 1, 1));
-    const sharpe = std > 0 ? avgRet / std : 0;
-    const avgDays = s.days.reduce((a, b) => a + b, 0) / s.days.length;
-    // Score: weighted blend of normalized return, win rate, and sample confidence
-    const confidence = Math.min(s.count / 5, 1); // full confidence at 5+ trades
-    const score = (avgRet * 0.5 + winRate * 0.4 + sharpe * 10 * 0.1) * confidence;
-    return { tag: s.tag, count: s.count, avgRet, winRate, sharpe, avgDays, score, rets: s.rets };
-  });
-}
-
-function computeCombos(minTags = 2, maxTags = 3) {
-  // Find trades with data
-  const loaded = trades.filter(t => t._pp != null);
-  if (loaded.length < 3) return [];
-  // Get all tags appearing in at least 2 loaded trades
-  const tagCounts = {};
-  loaded.forEach(tr => tr.tags.forEach(tag => { tagCounts[tag] = (tagCounts[tag] || 0) + 1; }));
-  const eligibleTags = Object.keys(tagCounts).filter(t => tagCounts[t] >= 2);
-  if (eligibleTags.length < 2) return [];
-  
-  const results = [];
-  // For each unique combination of 2-3 tags
-  function getCombos(arr, size) {
-    if (size === 1) return arr.map(t => [t]);
-    const out = [];
-    arr.forEach((t, i) => getCombos(arr.slice(i + 1), size - 1).forEach(rest => out.push([t, ...rest])));
-    return out;
-  }
-  for (let sz = minTags; sz <= Math.min(maxTags, eligibleTags.length); sz++) {
-    getCombos(eligibleTags, sz).forEach(combo => {
-      const matching = loaded.filter(tr => combo.every(tag => tr.tags.includes(tag)));
-      if (matching.length < 2) return;
-      const rets = matching.map(tr => tr.action.toLowerCase() === 'sell' ? -tr._pp : tr._pp);
-      const avgRet = rets.reduce((a, b) => a + b, 0) / rets.length;
-      const wins = rets.filter(r => r > 0).length;
-      const winRate = (wins / rets.length) * 100;
-      const std = Math.sqrt(rets.map(r => (r - avgRet) ** 2).reduce((a, b) => a + b, 0) / Math.max(rets.length - 1, 1));
-      const sharpe = std > 0 ? avgRet / std : 0;
-      const confidence = Math.min(matching.length / 5, 1);
-      const score = (avgRet * 0.5 + winRate * 0.4 + sharpe * 10 * 0.1) * confidence;
-      results.push({ tags: combo, count: matching.length, avgRet, winRate, sharpe, score, rets });
-    });
-  }
-  return results;
-}
-
-function getScoreGrade(score) {
-  if (score >= 20) return 's-a';
-  if (score >= 8)  return 's-b';
-  if (score >= 0)  return 's-c';
-  return 's-d';
-}
-function getScoreLabel(score) {
-  if (score >= 20) return 'A';
-  if (score >= 8)  return 'B';
-  if (score >= 0)  return 'C';
-  return 'D';
-}
-
-// ── Render ──
-function renderStratTab() {
-  document.getElementById('optimizer-out').style.display = 'none';
-  if (stratView === 'tags')     renderTagView();
-  else if (stratView === 'combos')   renderComboView();
-  else if (stratView === 'optimize') renderOptimizer();
-  buildStratSummary();
-}
-
-function getMetricVal(stats) {
-  if (stratMetric === 'return')  return stats.avgRet;
-  if (stratMetric === 'winrate') return stats.winRate;
-  if (stratMetric === 'sharpe')  return stats.sharpe;
-  return stats.avgRet;
-}
-function getMetricLabel() {
-  if (stratMetric === 'return')  return 'Avg Return %';
-  if (stratMetric === 'winrate') return 'Win Rate %';
-  if (stratMetric === 'sharpe')  return 'Sharpe-like Score';
-  return 'Avg Return %';
-}
-
-function renderTagView() {
-  const stats = computeTagStats().filter(s => s.count >= 1).sort((a, b) => b.score - a.score);
-  const cnt = document.getElementById('strat-count');
-  if (cnt) cnt.textContent = `${stats.length} tags`;
-  document.getElementById('strat-table-title').textContent = 'Tag Performance Rankings';
-  document.getElementById('strat-note').textContent = 'Trades with pricing data · min 1 per tag shown';
-  
-  // Chart
-  document.getElementById('strat-chart-panel').style.display='';
-  renderStratChart(
-    stats.slice(0, 12).map(s => s.tag),
-    stats.slice(0, 12).map(s => parseFloat(getMetricVal(s).toFixed(2))),
-    getMetricLabel()
-  );
-  
-  // Table
-  const thead = document.getElementById('strat-thead-row');
-  if (thead) thead.innerHTML = '<th>Rank</th><th>Tag</th><th>Count</th><th>Avg Return</th><th>Win Rate</th><th>Sharpe</th><th>Avg Days</th><th>Score</th>';
-  const tbody = document.getElementById('strat-tbody');
-  if (tbody) tbody.innerHTML = stats.map((s, i) => `<tr>
-    <td style="font-family:var(--mono);font-size:11px;color:var(--txt3)">#${i + 1}</td>
-    <td>${tagHtml(s.tag)}</td>
-    <td style="font-family:var(--mono);font-size:11px">${s.count}</td>
-    <td style="font-family:var(--mono);font-size:11px" class="${s.avgRet >= 0 ? 'sv pos' : 'sv neg'}">${(s.avgRet >= 0 ? '+' : '')}${s.avgRet.toFixed(2)}%</td>
-    <td style="font-family:var(--mono);font-size:11px">${s.winRate.toFixed(0)}%</td>
-    <td style="font-family:var(--mono);font-size:11px" class="${s.sharpe >= 0 ? 'sv pos' : 'sv neg'}">${s.sharpe.toFixed(2)}</td>
-    <td style="font-family:var(--mono);font-size:11px">${s.avgDays.toFixed(0)}d</td>
-    <td><span class="score-badge ${getScoreGrade(s.score)}">${getScoreLabel(s.score)} ${s.score.toFixed(1)}</span></td>
-  </tr>`).join('');
-}
-
-function renderComboView() {
-  const combos = computeCombos(2, 3).sort((a, b) => b.score - a.score);
-  const cnt = document.getElementById('strat-count');
-  if (cnt) cnt.textContent = `${combos.length} combos`;
-  document.getElementById('strat-table-title').textContent = 'Tag Combination Rankings (2–3 tags)';
-  document.getElementById('strat-note').textContent = 'min 2 trades per combo · sorted by composite score';
-
-  // Chart: top 10 combos
-  const top = combos.slice(0, 10);
-  document.getElementById('strat-chart-panel').style.display='';
-  renderStratChart(
-    top.map(s => s.tags.join('+')),
-    top.map(s => parseFloat(getMetricVal(s).toFixed(2))),
-    getMetricLabel()
-  );
-
-  // Table
-  const thead = document.getElementById('strat-thead-row');
-  if (thead) thead.innerHTML = '<th>Rank</th><th>Tag Combo</th><th>Count</th><th>Avg Return</th><th>Win Rate</th><th>Sharpe</th><th>Score</th>';
-  const tbody = document.getElementById('strat-tbody');
-  if (tbody) tbody.innerHTML = combos.map((s, i) => `<tr>
-    <td style="font-family:var(--mono);font-size:11px;color:var(--txt3)">#${i + 1}</td>
-    <td><div class="combo-chip">${s.tags.map(tagHtml).join('')}</div></td>
-    <td style="font-family:var(--mono);font-size:11px">${s.count}</td>
-    <td style="font-family:var(--mono);font-size:11px" class="${s.avgRet >= 0 ? 'sv pos' : 'sv neg'}">${(s.avgRet >= 0 ? '+' : '')}${s.avgRet.toFixed(2)}%</td>
-    <td style="font-family:var(--mono);font-size:11px">${s.winRate.toFixed(0)}%</td>
-    <td style="font-family:var(--mono);font-size:11px" class="${s.sharpe >= 0 ? 'sv pos' : 'sv neg'}">${s.sharpe.toFixed(2)}</td>
-    <td><span class="score-badge ${getScoreGrade(s.score)}">${getScoreLabel(s.score)} ${s.score.toFixed(1)}</span></td>
-  </tr>`).join('');
-}
-
-function renderOptimizer() {
-  const loaded = trades.filter(t => t._pp != null);
-  const cnt = document.getElementById('strat-count');
-  if (cnt) cnt.textContent = `${loaded.length} trades analysed`;
-  document.getElementById('strat-table-title').textContent = 'Optimizer: Ideal Tag Profile';
-  document.getElementById('strat-note').textContent = loaded.length < 5 ? '⚠ Need 5+ priced trades for reliable optimization' : `based on ${loaded.length} priced trades`;
-
-  const tagStats = computeTagStats().filter(s => s.count >= 2);
-  const combos = computeCombos(2, 3);
-
-  // Find the ideal "profile" tags: tags with score > median that appear together often
-  const medianScore = tagStats.map(s => s.score).sort((a, b) => a - b)[Math.floor(tagStats.length / 2)] || 0;
-  const strongTags = tagStats.filter(s => s.score > medianScore && s.avgRet > 0).sort((a, b) => b.score - a.score);
-  const weakTags = tagStats.filter(s => s.avgRet < 0 || s.score < 0).sort((a, b) => a.score - b.score);
-
-  const bestCombo = combos.filter(c => c.count >= 2).sort((a, b) => b.score - a.score)[0];
-  const worstCombo = combos.filter(c => c.count >= 2).sort((a, b) => a.score - b.score)[0];
-
-  // Confidence note
-  const confidence = loaded.length < 5 ? 'low' : loaded.length < 10 ? 'moderate' : 'good';
-  const confCol = confidence === 'low' ? 'var(--red)' : confidence === 'moderate' ? 'var(--acc)' : 'var(--green)';
-
-  // No chart in optimizer — just tables and insights
-
-  // Optimizer results
-  const optEl = document.getElementById('optimizer-out');
-  const optContent = document.getElementById('optimizer-content');
-  if (optEl) optEl.style.display = '';
-  // Hide the chart for optimizer view
-  const sp2 = document.getElementById('strat-chart-panel');
-  if(sp2) sp2.style.display = 'none';
-  if (optContent) {
-    optContent.innerHTML = `
-      <div class="opt-card">
-        <div class="opt-card-title">🎯 Ideal Trade Profile</div>
-        <div class="opt-card-body">
-          ${strongTags.length > 0 ? `<strong>Prefer tags:</strong> ${strongTags.slice(0, 5).map(s => tagHtml(s.tag) + ` <span style="font-family:var(--mono);font-size:10px;color:var(--green)">(+${s.avgRet.toFixed(1)}%, ${s.winRate.toFixed(0)}% win)</span>`).join(' ')}` : 'Not enough data yet.'}
-          ${weakTags.length > 0 ? `<br><br><strong>Avoid or review:</strong> ${weakTags.slice(0, 3).map(s => tagHtml(s.tag) + ` <span style="font-family:var(--mono);font-size:10px;color:var(--red)">(${s.avgRet.toFixed(1)}%, ${s.winRate.toFixed(0)}% win)</span>`).join(' ')}` : ''}
-        </div>
-      </div>
-      <div class="opt-card">
-        <div class="opt-card-title">🏆 Best Tag Combination Found</div>
-        <div class="opt-card-body">
-          ${bestCombo ? `<div class="combo-chip" style="margin-bottom:6px">${bestCombo.tags.map(tagHtml).join('')}</div>
-          Avg return <strong>${(bestCombo.avgRet >= 0 ? '+' : '')}${bestCombo.avgRet.toFixed(2)}%</strong> · Win rate <strong>${bestCombo.winRate.toFixed(0)}%</strong> · Score <strong>${bestCombo.score.toFixed(1)}</strong> · <span style="font-family:var(--mono);font-size:10px">n=${bestCombo.count}</span>` : 'Need more trades with overlapping tags.'}
-        </div>
-      </div>
-      <div class="opt-card">
-        <div class="opt-card-title">⚠️ Weakest Combination — Review</div>
-        <div class="opt-card-body">
-          ${worstCombo ? `<div class="combo-chip" style="margin-bottom:6px">${worstCombo.tags.map(tagHtml).join('')}</div>
-          Avg return <strong>${(worstCombo.avgRet >= 0 ? '+' : '')}${worstCombo.avgRet.toFixed(2)}%</strong> · Win rate <strong>${worstCombo.winRate.toFixed(0)}%</strong> · <span style="font-family:var(--mono);font-size:10px">n=${worstCombo.count}</span>` : 'Not enough combo data.'}
-        </div>
-      </div>
-      <div class="opt-card">
-        <div class="opt-card-title">📊 Confidence Assessment</div>
-        <div class="opt-card-body">
-          Sample size: <strong style="color:${confCol}">${confidence}</strong> confidence (${loaded.length} priced trades).
-          ${confidence === 'low' ? ' Results are directional only. Add more trades before acting on these signals.' :
-            confidence === 'moderate' ? ' Results are becoming meaningful. Continue building your history.' :
-            ' Good sample size for pattern detection. Results are statistically informative.'}
-          <br><br><strong>Score methodology:</strong> Composite score = 50% avg return + 40% win rate + 10% Sharpe-like ratio, scaled by trade count confidence (full weight at 5+ trades per tag).
-        </div>
-      </div>
-    `;
-  }
-
-  // Summary table with all tags
-  const thead = document.getElementById('strat-thead-row');
-  if (thead) thead.innerHTML = '<th>Tag</th><th>Count</th><th>Avg Return</th><th>Win Rate</th><th>Signal</th>';
-  const tbody = document.getElementById('strat-tbody');
-  if (tbody) tbody.innerHTML = tagStats.sort((a, b) => b.score - a.score).map(s => {
-    const signal = s.avgRet > 5 && s.winRate > 55 ? '✅ Strong' : s.avgRet > 0 ? '🟡 Neutral+' : '🔴 Weak';
-    return `<tr>
-      <td>${tagHtml(s.tag)}</td>
-      <td style="font-family:var(--mono);font-size:11px">${s.count}</td>
-      <td style="font-family:var(--mono);font-size:11px" class="${s.avgRet >= 0 ? 'sv pos' : 'sv neg'}">${(s.avgRet >= 0 ? '+' : '')}${s.avgRet.toFixed(2)}%</td>
-      <td style="font-family:var(--mono);font-size:11px">${s.winRate.toFixed(0)}%</td>
-      <td style="font-family:var(--mono);font-size:11px">${signal}</td>
-    </tr>`;
-  }).join('');
-}
-
-function renderStratChart(labels, values, yLabel) {
-  const wrap = document.getElementById('strat-chart-panel');
-  const oldCv = document.getElementById('strat-chart');
-  if (oldCv) oldCv.remove();
-  const cv = document.createElement('canvas'); cv.id = 'strat-chart';
-  const inner = wrap.querySelector('div');
-  if (inner) inner.appendChild(cv);
-  if (stratChart) { stratChart.destroy(); stratChart = null; }
-  if (!labels.length) return;
-
-  const colors = values.map(v => v >= 0 ? 'rgba(45,212,160,0.75)' : 'rgba(240,98,146,0.75)');
-  const borders = values.map(v => v >= 0 ? '#2dd4a0' : '#f06292');
-
-  stratChart = new Chart(cv, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: colors,
-        borderColor: borders,
-        borderWidth: 1.5,
-        borderRadius: 5,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false, animation: { duration: 400 },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(13,17,35,.95)', borderColor: 'rgba(255,255,255,.1)', borderWidth: 1,
-          titleColor: '#8896aa', bodyColor: '#d0d9f0', padding: 9,
-          titleFont: { family: 'DM Mono', size: 10 }, bodyFont: { family: 'DM Mono', size: 12, weight: '500' },
-          callbacks: { label: i => ` ${i.parsed.y >= 0 ? '+' : ''}${i.parsed.y.toFixed(2)}${stratMetric === 'winrate' ? '%' : stratMetric === 'return' ? '%' : ''}` }
-        }
-      },
-      scales: {
-        x: { grid: { color: 'rgba(150,150,150,0.06)' }, ticks: { font: { family: 'DM Mono', size: 9 }, color: '#8896aa', maxRotation: 35 }, border: { display: false } },
-        y: {
-          title: { display: true, text: yLabel, font: { family: 'DM Mono', size: 9 }, color: '#8896aa' },
-          grid: { color: 'rgba(150,150,150,0.06)' },
-          ticks: { font: { family: 'DM Mono', size: 9 }, color: '#8896aa', callback: v => `${v >= 0 ? '+' : ''}${v.toFixed(1)}` },
-          border: { display: false }
-        }
-      }
-    }
-  });
-}
-
 
 // ── ADD/EDIT TAB ──
 function buildNTTab(){
@@ -1822,7 +1227,7 @@ function setAction(a){newAction=a;document.getElementById('f-buy').className=a==
 function buildTagPicker(){
   const at=allTags();const chips=document.getElementById('tag-chips');if(!chips)return;
   chips.innerHTML='';document.getElementById('sug-zone').style.display=at.length?'':'none';
-  at.forEach(tag=>{const sp=document.createElement('span');sp.className='pick-chip';sp.style.cssText=tagCss(tag);sp.textContent=tag;sp.onclick=()=>toggleTag(tag);chips.appendChild(sp);});
+  at.forEach(tag=>{const c=document.createElement('span');c.className=`pick-chip ${tCls(tag)}`;c.textContent=tag;c.onclick=()=>toggleTag(tag);chips.appendChild(c);});
   refreshSelArea();
 }
 function toggleTag(tag){if(selTags.has(tag))selTags.delete(tag);else selTags.add(tag);refreshSelArea();}
@@ -1830,7 +1235,7 @@ function refreshSelArea(){
   const area=document.getElementById('sel-tags');if(!area)return;area.innerHTML='';
   if(!selTags.size){area.classList.add('empty');return;}
   area.classList.remove('empty');
-  sortTags([...selTags]).forEach(tag=>{const s=document.createElement('span');s.className='s-chip';s.style.cssText=tagCss(tag);s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
+  [...selTags].forEach(tag=>{const s=document.createElement('span');s.className=`s-chip ${tCls(tag)}`;s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
   document.querySelectorAll('#tag-chips .pick-chip').forEach(c=>{c.style.opacity=selTags.has(c.textContent)?.2:.6;});
 }
 window.rmTag=t=>{selTags.delete(t);refreshSelArea();};
@@ -1841,81 +1246,10 @@ function addCustomTag(){
   let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;inp.value='';selTags.add(val);
   const chips=document.getElementById('tag-chips');
   if(chips&&![...chips.querySelectorAll('.pick-chip')].find(c=>c.textContent===val)){
-    const chip=document.createElement('span');chip.className='pick-chip';chip.style.cssText=tagCss(val);chip.textContent=val;chip.onclick=()=>toggleTag(val);chips.appendChild(chip);
+    const c=document.createElement('span');c.className=`pick-chip ${tCls(val)}`;c.textContent=val;c.onclick=()=>toggleTag(val);chips.appendChild(c);
   }
   refreshSelArea();
 }
-
-// ── STOCK TAG SUGGESTIONS ────────────────────────────────────────────────
-// Known ticker metadata for instant tag suggestions on lookup
-const STOCK_META = {
-  // Large-cap US Tech
-  AAPL:['#large-cap','#tech','#us'],  MSFT:['#large-cap','#tech','#us'],
-  GOOGL:['#large-cap','#tech','#us'], GOOG:['#large-cap','#tech','#us'],
-  AMZN:['#large-cap','#tech','#us'],  META:['#large-cap','#tech','#us'],
-  NVDA:['#large-cap','#tech','#us','#ai','#semiconductor'],
-  TSLA:['#large-cap','#tech','#us','#ev'],
-  ORCL:['#large-cap','#tech','#us'], ADBE:['#large-cap','#tech','#us'],
-  INTC:['#large-cap','#tech','#us','#semiconductor'],
-  AMD:['#large-cap','#tech','#us','#semiconductor','#ai'],
-  QCOM:['#large-cap','#tech','#us','#semiconductor'],
-  PLTR:['#mid-cap','#tech','#us','#ai'],
-  SMCI:['#mid-cap','#tech','#us'],
-  // US Financials
-  JPM:['#large-cap','#financials','#us'],  BAC:['#large-cap','#financials','#us'],
-  GS:['#large-cap','#financials','#us'],   MS:['#large-cap','#financials','#us'],
-  V:['#large-cap','#financials','#us'],    MA:['#large-cap','#financials','#us'],
-  BRK_B:['#large-cap','#financials','#us'], 'BRK-B':['#large-cap','#financials','#us'],
-  SCHW:['#mid-cap','#financials','#us'],   UNH:['#large-cap','#healthcare','#us'],
-  // EU Tech / Large-cap
-  ASML:['#large-cap','#tech','#eu','#semiconductor'],
-  SAP:['#large-cap','#tech','#eu'],        LVMH:['#large-cap','#consumer','#eu'],
-  NESN:['#large-cap','#consumer','#eu'],   NOVN:['#large-cap','#healthcare','#eu'],
-  ROG:['#large-cap','#healthcare','#eu'],  NOVO_B:['#large-cap','#healthcare','#eu'],
-  SIEMENS:['#large-cap','#industrials','#eu'],
-  // US Healthcare
-  JNJ:['#large-cap','#healthcare','#us'],  PFE:['#large-cap','#healthcare','#us'],
-  ABBV:['#large-cap','#healthcare','#us'], LLY:['#large-cap','#healthcare','#us'],
-  // US Energy/Industrials
-  XOM:['#large-cap','#energy','#us'],      CVX:['#large-cap','#energy','#us'],
-  CAT:['#large-cap','#industrials','#us'], BA:['#large-cap','#industrials','#us'],
-};
-
-function getStockSuggestedTags(ticker, stockName, stockExchange) {
-  const k = ticker.toUpperCase().replace('-','_');
-  // Check known metadata first
-  if (STOCK_META[k]) return STOCK_META[ticker.toUpperCase()] || STOCK_META[k];
-  // Infer from exchange/name heuristics
-  const tags = [];
-  const ex = (stockExchange||'').toLowerCase();
-  const nm = (stockName||'').toLowerCase();
-  // Region
-  if (['nasdaq','nyse','amex','cboe'].some(e=>ex.includes(e))) tags.push('#us');
-  else if (['xetra','euronext','lse','borsa','xpar','xams','xmil'].some(e=>ex.includes(e))) tags.push('#eu');
-  // Sector from name keywords
-  if (['bank','financial','insurance','invest','capital','asset'].some(w=>nm.includes(w))) tags.push('#financials');
-  else if (['pharma','biotech','health','med','drug','therapeut'].some(w=>nm.includes(w))) tags.push('#healthcare');
-  else if (['tech','software','data','cloud','cyber','digital','ai','semi'].some(w=>nm.includes(w))) tags.push('#tech');
-  else if (['energy','oil','gas','power','renewabl'].some(w=>nm.includes(w))) tags.push('#energy');
-  else if (['consumer','retail','brand','luxury','food','beverag'].some(w=>nm.includes(w))) tags.push('#consumer');
-  return tags;
-}
-
-function renderStockSuggestedTags(tags) {
-  const zone = document.getElementById('stock-sug-zone');
-  const chips = document.getElementById('stock-tag-chips');
-  if (!zone || !chips) return;
-  if (!tags.length) { zone.style.display='none'; return; }
-  zone.style.display='';
-  chips.innerHTML='';
-  tags.forEach(tag=>{
-    const sp=document.createElement('span');
-    sp.className='pick-chip';sp.style.cssText=tagCss(tag);sp.textContent=tag;
-    sp.onclick=()=>toggleTag(tag);
-    chips.appendChild(sp);
-  });
-}
-
 document.getElementById('f-lookup').onclick=async()=>{
   const t=(document.getElementById('f-ticker')?.value||'').trim().toUpperCase();
   const d=document.getElementById('f-date')?.value||new Date().toISOString().split('T')[0];
@@ -1924,12 +1258,9 @@ document.getElementById('f-lookup').onclick=async()=>{
   try{
     const q=await fetchPriceAt(t,d);
     if(hint){hint.textContent=`${q.name||t} · ${fp(q.price,q.currency)} on ${fd(d)}`;hint.className='th2';}
-    const pi=document.getElementById('f-price');if(pi&&q.price)pi.value=q.price.toFixed(2); // Always replace on lookup
+    const pi=document.getElementById('f-price');if(pi&&!pi.value&&q.price)pi.value=q.price.toFixed(2);
     if(editId===null)trades.filter(tr=>tr.ticker.toUpperCase()===t).forEach(tr=>tr.tags.forEach(g=>selTags.add(g)));
     refreshSelArea();
-    // Show stock-specific suggested tags
-    const sugTags=getStockSuggestedTags(t,q.name||'',q.exchange||'');
-    renderStockSuggestedTags(sugTags);
   }catch(e){if(hint){hint.textContent='Ticker not found';hint.className='th2 err';}}
 };
 document.getElementById('f-date').onchange=async()=>{
@@ -1968,7 +1299,7 @@ function clearForm(){
   editId=null;['f-ticker','f-shares','f-price','f-reason'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
   const hint=document.getElementById('f-hint');if(hint){hint.textContent='';hint.className='th2';}
-  selTags.clear();buildTagPicker();setAction('buy');renderStockSuggestedTags([]);
+  selTags.clear();buildTagPicker();setAction('buy');
   document.getElementById('f-title').textContent='Add New Trade';
   document.getElementById('f-submit').textContent='➕ Add Trade';
   document.getElementById('f-banner').classList.remove('show');
@@ -2086,14 +1417,11 @@ function hideLS(){document.getElementById('ls').classList.remove('on');}
 
 // ── INIT ──
 (async()=>{
-  const _VALID=['light','midnight','forest','dusk'];
-  const _stored=localStorage.getItem('tj_theme');
-  setTheme((_stored&&_VALID.includes(_stored))?_stored:'light');
+  setTheme(localStorage.getItem('tj_theme')||'light');
   renderLogo();buildSettingsTab();
   if(!hasFSA)return;
   try{const h=await idbGet('fh');if(!h)return;const p=await h.queryPermission({mode:'readwrite'});if(p==='granted'){fileHandle=h;showT('Auto-loading…');await loadHandle(h);}}catch(e){}
 })();
-
 </script>
 </body>
 </html>
