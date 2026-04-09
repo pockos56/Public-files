@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Trading Journal v1.9.1</title>
+<title>Trading Journal v1.9.5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -317,6 +317,34 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 .toast.on{transform:translateY(0);opacity:1}
 .toast.err{background:var(--red);color:#fff}.toast.ok{background:var(--green);color:#0d1421}
 @media(max-width:640px){#cards-grid{grid-template-columns:1fr}.sum-bar{grid-template-columns:repeat(2,1fr)}.sr{grid-template-columns:repeat(2,1fr)}.st:nth-child(2){border-right:none}.tab-nav{margin:6px 0 0}.s-grid{grid-template-columns:1fr}}
+
+/* ═══ STRATEGY NAV ═══ */
+.strat-nav{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:18px;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:13px;box-shadow:var(--sh);transition:background .3s,border-color .3s}
+.strat-view-group{display:flex;background:var(--bg3);border-radius:10px;padding:4px;gap:2px;transition:background .3s}
+.strat-view-btn{display:flex;align-items:center;gap:7px;padding:10px 22px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;border:none;background:none;color:var(--txt3);cursor:pointer;border-radius:7px;transition:all .18s;white-space:nowrap}
+.strat-view-btn:hover{color:var(--txt2)}
+.strat-view-btn.active,.strat-view-btn.a-s{background:var(--bg2);color:var(--txt);box-shadow:var(--sh)}
+.strat-sep{width:60%;height:1px;background:var(--border)}
+.strat-metric-group{display:flex;align-items:center;gap:6px}
+.strat-metric-lbl{font-family:var(--mono);font-size:10px;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;margin-right:4px}
+.strat-metric-btn{padding:7px 16px;font-family:var(--mono);font-size:11px;border-radius:999px;border:1px solid var(--border2);background:var(--bg2);color:var(--txt2);cursor:pointer;transition:all .15s}
+.strat-metric-btn:hover{border-color:var(--acc);color:var(--acc)}
+.strat-metric-btn.active,.strat-metric-btn.a-all{border-color:var(--acc);background:var(--abg);color:var(--acc);font-weight:500}
+.s-chart-panel{background:var(--bg2);border:1px solid var(--border);border-radius:13px;padding:16px 18px;box-shadow:var(--sh);transition:background .3s,border-color .3s}
+.opt-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 22px;box-shadow:var(--sh);margin-bottom:14px;transition:background .3s,border-color .3s}
+.opt-card-title{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--txt);margin-bottom:10px;letter-spacing:.02em}
+.opt-card-body{font-size:13px;color:var(--txt2);line-height:1.75}
+.score-badge{display:inline-flex;align-items:center;justify-content:center;padding:2px 8px;border-radius:999px;font-family:var(--mono);font-size:10px;font-weight:600;min-width:44px}
+.score-badge.s-a{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.score-badge.s-b{background:#dbeafe;color:#1d4ed8;border:1px solid #93c5fd}
+.score-badge.s-c{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.score-badge.s-d{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.combo-chip{display:inline-flex;align-items:center;gap:3px;flex-wrap:wrap}
+
+.opt-xwin-group{display:flex;gap:2px;background:var(--bg3);border-radius:7px;padding:3px}
+.opt-xwin-btn{padding:4px 9px;font-family:var(--mono);font-size:10px;border:none;background:none;color:var(--txt3);cursor:pointer;border-radius:5px;transition:all .15s;letter-spacing:.04em}
+.opt-xwin-btn:hover{color:var(--txt2)}
+.opt-xwin-btn.active{background:var(--bg2);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 </style>
 </head>
 <body>
@@ -393,7 +421,15 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
           <span class="opt-title">🚪 Optimal Exit Analysis</span>
           <span class="opt-sub" id="opt-sub"></span>
         </div>
-        <button class="btn btn-sm" onclick="updateOptExit()">↺</button>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          <div class="opt-xwin-group">
+            <button class="opt-xwin-btn" data-xwin="30" onclick="setOptXWindow(30)">1M</button>
+            <button class="opt-xwin-btn" data-xwin="90" onclick="setOptXWindow(90)">3M</button>
+            <button class="opt-xwin-btn" data-xwin="180" onclick="setOptXWindow(180)">6M</button>
+            <button class="opt-xwin-btn active" data-xwin="0" onclick="setOptXWindow(0)">All</button>
+          </div>
+          <button class="btn btn-sm" onclick="updateOptExit()">↺</button>
+        </div>
       </div>
       <div id="opt-canvas-wrap" class="tall"><canvas id="opt-canvas"></canvas></div>
     </div>
@@ -430,13 +466,26 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
           Optimizer
         </button>
       </div>
+      <div class="strat-sep"></div>
       <div class="strat-metric-group">
-        <span class="strat-metric-lbl">Metric:</span>
-        <button class="strat-metric-btn active" data-smetric="return">Return</button>
-        <button class="strat-metric-btn" data-smetric="winrate">Win Rate</button>
-        <button class="strat-metric-btn" data-smetric="sharpe">Sharpe</button>
+        <span class="strat-metric-lbl">Metric</span>
+        <button class="strat-metric-btn active" data-smetric="return"
+          title="Average % return across all trades with this tag. Positive = profitable on average.">Avg Return</button>
+        <button class="strat-metric-btn" data-smetric="winrate"
+          title="Percentage of trades that ended in profit. 100% = all winners, 0% = all losers, 50% = break-even.">Win Rate</button>
+        <button class="strat-metric-btn" data-smetric="sharpe"
+          title="Sharpe-like score: avg return ÷ std deviation. Measures consistency — high return with low variance scores best. Above 1.0 is strong; below 0 means risk outweighs return.">Sharpe ⓘ</button>
       </div>
       <div class="tc-c" id="strat-count"></div>
+    </div>
+    <!-- Time window (By Tag only) -->
+    <div id="strat-timewin-bar" style="display:none;justify-content:center;gap:4px;margin-bottom:12px;flex-wrap:wrap">
+      <span style="font-family:var(--mono);font-size:10px;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;align-self:center;margin-right:4px">Time window</span>
+      <button class="opt-xwin-btn" data-twin="7"   onclick="setStratTagWindow(7)">1W</button>
+      <button class="opt-xwin-btn" data-twin="30"  onclick="setStratTagWindow(30)">1M</button>
+      <button class="opt-xwin-btn" data-twin="90"  onclick="setStratTagWindow(90)">3M</button>
+      <button class="opt-xwin-btn" data-twin="180" onclick="setStratTagWindow(180)">6M</button>
+      <button class="opt-xwin-btn active" data-twin="0" onclick="setStratTagWindow(0)">All</button>
     </div>
     <!-- Chart area -->
     <div class="s-chart-panel" id="strat-chart-panel">
@@ -477,6 +526,7 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
           <div class="tag-sec">
             <div><div class="tz-lbl">✓ Selected</div><div class="sel-area empty" id="sel-tags"></div></div>
             <div id="sug-zone"><div class="tz-lbl">Suggested from your trades</div><div id="tag-chips" style="display:flex;flex-wrap:wrap;gap:5px"></div></div>
+            <div id="stock-sug-zone" style="display:none"><div class="tz-lbl">Suggested for this stock <span style="font-family:var(--mono);font-size:9px;color:var(--acc)">(from lookup)</span></div><div id="stock-tag-chips" style="display:flex;flex-wrap:wrap;gap:5px"></div></div>
             <div><div class="tz-lbl">Add custom tag</div><div class="tag-add-r"><input type="text" id="tag-custom" placeholder="#custom · Enter to add"/><button class="btn btn-sm" id="tag-add-btn">Add</button></div></div>
           </div>
         </div>
@@ -549,7 +599,7 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
         <p style="font-size:12px;color:var(--txt3);line-height:1.65">Built with Chart.js and the Yahoo Finance API. Works offline after the first load.</p>
       </div>
     </div>
-    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.9.1 &nbsp;&middot;&nbsp; 2026</div>
+    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.9.5 &nbsp;&middot;&nbsp; 2026</div>
   </div>
 </div>
 </div>
@@ -577,7 +627,8 @@ let rSort='date',rDir='asc',rFilter='all',rTag='__all__';
 let cSort='date-asc',cFilter='all',cTag='__all__';
 let newAction='buy',selTags=new Set(),editId=null;
 let tlSC='date',tlSD='desc';
-let optMode=localStorage.getItem('tj_opt_mode')||'dual'; // 'tall' | 'dual'
+let optMode=localStorage.getItem('tj_opt_mode')||'dual'; // 'tall'|'dual'
+let optXWindow=0; // 0=all, 30=1M, 90=3M, 180=6Mll' | 'dual'
 let retryTimers={};
 const hasFSA='showOpenFilePicker' in window;
 
@@ -814,7 +865,7 @@ function parseYahoo(j) {
   const cl = res.indicators?.adjclose?.[0]?.adjclose || res.indicators?.quote?.[0]?.close || [];
   const m = res.meta || {};
   const pts = ts.map((t, i) => ({ date: tsD(t), close: cl[i] })).filter(d => d.close != null && d.close > 0);
-  return { pts, meta: { name: m.longName || m.shortName || m.symbol || '', currency: m.currency || 'USD', lastPrice: m.regularMarketPrice || pts.at(-1)?.close || null } };
+  return { pts, meta: { name: m.longName || m.shortName || m.symbol || '', currency: m.currency || 'USD', exchange: m.exchangeName || m.fullExchangeName || '', lastPrice: m.regularMarketPrice || pts.at(-1)?.close || null } };
 }
 function tsD(ts) { return new Date(ts * 1000).toISOString().split('T')[0]; }
 
@@ -850,7 +901,7 @@ async function fetchPriceAt(ticker, date) {
   const today = new Date().toISOString().split('T')[0];
   const target = date > today ? today : date;
   const pt = d.pts.find(p => p.date >= target) || d.pts.at(-1);
-  return { price: pt?.close || null, name: d.meta.name, currency: d.meta.currency || 'USD' };
+  return { price: pt?.close || null, name: d.meta.name, currency: d.meta.currency || 'USD', exchange: d.meta.exchange || '' };
 }
 
 // ── HELPERS ──
@@ -970,7 +1021,7 @@ function switchTab(tab,force=false){
     else{renderRet();refreshOvSum();} // always re-render; prevents stale spinners
   }
   if(tab==='charts'){if(!chartsBuilt||force)buildChartsTab();else updateOptExit();}
-  if(tab==='strategy')buildStrategyTab(false);
+  if(tab==='strategy')buildStrategyTab();
   if(tab==='newtrade')buildNTTab();
   if(tab==='settings')buildSettingsTab();
 }
@@ -1313,26 +1364,39 @@ function updateChSum(){
   const rk=loaded.filter(t=>t._pp!=null).sort((a,b)=>b._pp-a._pp);
   if(rk.length){const b=rk[0],w=rk.at(-1);$('cs-best').textContent=b.ticker.toUpperCase();$('cs-bests').textContent=(b._pp>=0?'+':'')+b._pp.toFixed(2)+'%';$('cs-worst').textContent=w.ticker.toUpperCase();$('cs-worsts').textContent=(w._pp>=0?'+':'')+w._pp.toFixed(2)+'%';}
 }
+function setOptXWindow(days){
+  optXWindow=days;
+  document.querySelectorAll('.opt-xwin-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.xwin)===days));
+  updateOptExit();
+}
 function updateOptExit(){
   const panel=document.getElementById('opt-panel');if(!panel)return;
   const buys=getCardList().filter(t=>t.action.toLowerCase()==='buy');
   const avail=buys.filter(t=>{const k=t.ticker.toUpperCase();return(cacheD[k]||cacheW[k])?.pts?.length;});
   if(avail.length<2){panel.style.display='none';return;}
   panel.style.display='';
-  // Apply canvas height mode
   const wrap=document.getElementById('opt-canvas-wrap');
   wrap.className=optMode==='tall'?'tall':'dual';
   const sub=document.getElementById('opt-sub');
   const tagLbl=cTag==='__all__'?'all tags':cTag;
   const modeLabel=optMode==='tall'?'tall view':'dual-axis view';
-  if(sub)sub.textContent=`${avail.length} trades · ${tagLbl} · ${modeLabel}`;
+  const winLabel=optXWindow?`≤${optXWindow}d`:'all time';
+  if(sub)sub.textContent=`${avail.length} trades · ${tagLbl} · ${modeLabel} · ${winLabel}`;
   const indivDatasets=[];const peaks=[];
   avail.forEach((tr,i)=>{
     const k=tr.ticker.toUpperCase();const pts=(cacheD[k]||cacheW[k])?.pts||[];
     const tpts=pts.filter(p=>p.date>=tr.date);if(tpts.length<2)return;
     const ep=tr.price||tpts[0].close;if(!ep)return;
     let maxPct=-Infinity,maxDay=0;
-    const data=tpts.map(p=>{const day=Math.round((new Date(p.date)-new Date(tr.date))/86400000);const pct=((p.close-ep)/ep)*100;if(pct>maxPct){maxPct=pct;maxDay=day;}return{x:day,y:parseFloat(pct.toFixed(2))};});
+    // Apply x-window filter: only include points up to optXWindow days
+    const rawData=tpts.map(p=>{
+      const day=Math.round((new Date(p.date)-new Date(tr.date))/86400000);
+      const pct=((p.close-ep)/ep)*100;
+      if(pct>maxPct){maxPct=pct;maxDay=day;}
+      return{x:day,y:parseFloat(pct.toFixed(2))};
+    });
+    const data=optXWindow?rawData.filter(p=>p.x<=optXWindow):rawData;
+    if(data.length<2)return;
     const col=LINE_COLS[i%LINE_COLS.length];
     const ds={label:tr.ticker.toUpperCase(),data,borderColor:col+'55',backgroundColor:'transparent',borderWidth:1.2,pointRadius:0,tension:0.25,order:1};
     if(optMode==='dual') ds.yAxisID='y2';
@@ -1340,7 +1404,7 @@ function updateOptExit(){
     peaks.push({ticker:tr.ticker.toUpperCase(),maxDay,maxPct});
   });
   if(!indivDatasets.length){panel.style.display='none';return;}
-  // Average line
+  // Average line — computed across all individual series
   const allX=[...new Set(indivDatasets.flatMap(d=>d.data.map(p=>p.x)))].sort((a,b)=>a-b);
   const avgData=allX.map(x=>{
     const vs=indivDatasets.map(d=>{const bf=d.data.filter(p=>p.x<=x);return bf.length?bf.at(-1).y:null;}).filter(v=>v!==null);
@@ -1350,8 +1414,10 @@ function updateOptExit(){
   const avgDs={label:'Average',data:avgData,borderColor:avgColor,backgroundColor:'transparent',borderWidth:2.8,pointRadius:0,tension:0.3,order:0,z:10};
   if(optMode==='dual') avgDs.yAxisID='y';
   const datasets=[...indivDatasets,avgDs];
-  const avgPeakDay=Math.round(peaks.reduce((s,p)=>s+p.maxDay,0)/peaks.length);
-  const avgPeakPct=peaks.reduce((s,p)=>s+p.maxPct,0)/peaks.length;
+  // FIX: avgPeakDay comes from the AVERAGE LINE's actual maximum point, not per-trade peaks
+  const avgPeak=avgData.reduce((best,p)=>p.y>best.y?p:best,{x:0,y:-Infinity});
+  const avgPeakDay=avgPeak.x;
+  const avgPeakPct=avgPeak.y;
   const best=peaks.slice().sort((a,b)=>b.maxPct-a.maxPct)[0];
   // Rebuild canvas
   const oldCv=document.getElementById('opt-canvas');if(oldCv)oldCv.remove();
@@ -1413,8 +1479,9 @@ function fetchAllD() {
 }
 
 // ── STRATEGY ANALYSIS TAB ──
-let stratView = 'tags';    // 'tags' | 'combos' | 'optimize'
+let stratView = 'optimize'; // 'tags' | 'combos' | 'optimize'
 let stratMetric = 'return'; // 'return' | 'winrate' | 'sharpe'
+let stratTagWindow = 0; // 0=all, 7=1W, 30=1M, 90=3M, 180=6M
 let stratChart = null;
 
 document.addEventListener('click', e => {
@@ -1432,12 +1499,21 @@ document.addEventListener('click', e => {
   }
 });
 
-function buildStrategyTab(force=false) {
-  // Always default to 'tags' view on first open
-  if(stratView==='tags'||force) {
-    document.querySelectorAll('[data-sview]').forEach(b=>b.classList.toggle('a-s',b.dataset.sview==='tags'));
-    stratView='tags';
-  }
+function setStratTagWindow(days) {
+  stratTagWindow = days;
+  document.querySelectorAll('[data-twin]').forEach(b => b.classList.toggle('active', parseInt(b.dataset.twin) === days));
+  renderTagView();
+}
+function buildStrategyTab() {
+  // Ensure By Tag is active on every open
+  document.querySelectorAll('[data-sview]').forEach(b => {
+    b.classList.toggle('a-s', b.dataset.sview === stratView);
+    b.classList.toggle('active', b.dataset.sview === stratView);
+  });
+  document.querySelectorAll('[data-smetric]').forEach(b => {
+    b.classList.toggle('a-all', b.dataset.smetric === stratMetric);
+    b.classList.toggle('active', b.dataset.smetric === stratMetric);
+  });
   buildStratSummary();
   renderStratTab();
 }
@@ -1475,18 +1551,50 @@ function buildStratSummary() {
 }
 
 // ── Core stats functions ──
-function computeTagStats() {
+function computeTagStats(windowDays=0) {
+  // windowDays: 0=use current _pp (all time), else use price at trade+windowDays
   const map = {};
   trades.forEach(tr => {
-    if (tr._pp == null) return;
-    const ret = tr.action.toLowerCase() === 'sell' ? -tr._pp : tr._pp;
+    const isSell = tr.action.toLowerCase() === 'sell';
+    let ret = null;
+    if (windowDays > 0) {
+      // Use cached daily data to get return at specific holding period
+      const k = tr.ticker.toUpperCase();
+      const pts = (cacheD[k] || cacheW[k])?.pts || [];
+      const tpts = pts.filter(p => p.date >= tr.date);
+      const ep = tr.price || tpts[0]?.close;
+      if (ep && tpts.length) {
+        const targetDate = addDays(tr.date, windowDays);
+        const cp = priceAt(tpts, targetDate);
+        if (cp) ret = isSell ? -((cp - ep) / ep * 100) : (cp - ep) / ep * 100;
+      }
+    } else {
+      if (tr._pp == null) return;
+      ret = isSell ? -tr._pp : tr._pp;
+    }
+    if (ret === null) return;
     const days = Math.round((Date.now() - new Date(tr.date)) / 86400000);
+    // Compute peak exit day from daily data (for best-exit analysis)
+    const k2 = tr.ticker.toUpperCase();
+    const pts2 = (cacheD[k2] || cacheW[k2])?.pts || [];
+    const tpts2 = pts2.filter(p => p.date >= tr.date);
+    const ep2 = tr.price || tpts2[0]?.close;
+    let bestExitDay = null;
+    if (ep2 && tpts2.length > 1) {
+      let maxPct = -Infinity;
+      tpts2.forEach(p => {
+        const d = Math.round((new Date(p.date) - new Date(tr.date)) / 86400000);
+        const pct = (p.close - ep2) / ep2 * 100;
+        if (pct > maxPct) { maxPct = pct; bestExitDay = d; }
+      });
+    }
     tr.tags.forEach(tag => {
-      if (!map[tag]) map[tag] = { tag, rets: [], wins: 0, count: 0, days: [] };
+      if (!map[tag]) map[tag] = { tag, rets: [], wins: 0, count: 0, days: [], exitDays: [] };
       map[tag].rets.push(ret);
       map[tag].wins += ret > 0 ? 1 : 0;
       map[tag].count++;
       map[tag].days.push(days);
+      if (bestExitDay !== null) map[tag].exitDays.push(bestExitDay);
     });
   });
   return Object.values(map).map(s => {
@@ -1495,10 +1603,10 @@ function computeTagStats() {
     const std = Math.sqrt(s.rets.map(r => (r - avgRet) ** 2).reduce((a, b) => a + b, 0) / Math.max(s.rets.length - 1, 1));
     const sharpe = std > 0 ? avgRet / std : 0;
     const avgDays = s.days.reduce((a, b) => a + b, 0) / s.days.length;
-    // Score: weighted blend of normalized return, win rate, and sample confidence
-    const confidence = Math.min(s.count / 5, 1); // full confidence at 5+ trades
+    const avgExitDay = s.exitDays.length ? Math.round(s.exitDays.reduce((a, b) => a + b, 0) / s.exitDays.length) : null;
+    const confidence = Math.min(s.count / 5, 1);
     const score = (avgRet * 0.5 + winRate * 0.4 + sharpe * 10 * 0.1) * confidence;
-    return { tag: s.tag, count: s.count, avgRet, winRate, sharpe, avgDays, score, rets: s.rets };
+    return { tag: s.tag, count: s.count, avgRet, winRate, sharpe, avgDays, avgExitDay, score, rets: s.rets };
   });
 }
 
@@ -1574,22 +1682,27 @@ function getMetricLabel() {
 }
 
 function renderTagView() {
-  const stats = computeTagStats().filter(s => s.count >= 1).sort((a, b) => b.score - a.score);
+  const winBar = document.getElementById('strat-timewin-bar');
+  if (winBar) winBar.style.display = 'flex';
+  const stats = computeTagStats(stratTagWindow).filter(s => s.count >= 1).sort((a, b) => b.score - a.score);
   const cnt = document.getElementById('strat-count');
   if (cnt) cnt.textContent = `${stats.length} tags`;
-  document.getElementById('strat-table-title').textContent = 'Tag Performance Rankings';
-  document.getElementById('strat-note').textContent = 'Trades with pricing data · min 1 per tag shown';
-  
+  const winLabel = stratTagWindow ? `at ${stratTagWindow}d` : 'to date';
+  document.getElementById('strat-table-title').textContent = `Tag Performance — ${winLabel}`;
+  document.getElementById('strat-note').textContent = `Returns ${winLabel} · min 1 trade per tag`;
+
   // Chart
+  const spTag = document.getElementById('strat-chart-panel');
+  if (spTag) spTag.style.display = '';
   renderStratChart(
     stats.slice(0, 12).map(s => s.tag),
     stats.slice(0, 12).map(s => parseFloat(getMetricVal(s).toFixed(2))),
     getMetricLabel()
   );
-  
-  // Table
+
+  // Table — include avg exit day column
   const thead = document.getElementById('strat-thead-row');
-  if (thead) thead.innerHTML = '<th>Rank</th><th>Tag</th><th>Count</th><th>Avg Return</th><th>Win Rate</th><th>Sharpe</th><th>Avg Days</th><th>Score</th>';
+  if (thead) thead.innerHTML = '<th>Rank</th><th>Tag</th><th>Count</th><th>Avg Return</th><th>Win Rate</th><th>Sharpe</th><th>Avg Held</th><th>Best Exit</th><th>Score</th>';
   const tbody = document.getElementById('strat-tbody');
   if (tbody) tbody.innerHTML = stats.map((s, i) => `<tr>
     <td style="font-family:var(--mono);font-size:11px;color:var(--txt3)">#${i + 1}</td>
@@ -1599,11 +1712,15 @@ function renderTagView() {
     <td style="font-family:var(--mono);font-size:11px">${s.winRate.toFixed(0)}%</td>
     <td style="font-family:var(--mono);font-size:11px" class="${s.sharpe >= 0 ? 'sv pos' : 'sv neg'}">${s.sharpe.toFixed(2)}</td>
     <td style="font-family:var(--mono);font-size:11px">${s.avgDays.toFixed(0)}d</td>
+    <td style="font-family:var(--mono);font-size:11px">${s.avgExitDay !== null ? 'd' + s.avgExitDay : '—'}</td>
     <td><span class="score-badge ${getScoreGrade(s.score)}">${getScoreLabel(s.score)} ${s.score.toFixed(1)}</span></td>
   </tr>`).join('');
 }
 
+
 function renderComboView() {
+  const winBar = document.getElementById('strat-timewin-bar');
+  if (winBar) winBar.style.display = 'none';
   const combos = computeCombos(2, 3).sort((a, b) => b.score - a.score);
   const cnt = document.getElementById('strat-count');
   if (cnt) cnt.textContent = `${combos.length} combos`;
@@ -1611,6 +1728,8 @@ function renderComboView() {
   document.getElementById('strat-note').textContent = 'min 2 trades per combo · sorted by composite score';
 
   // Chart: top 10 combos
+  const spCombo = document.getElementById('strat-chart-panel');
+  if (spCombo) spCombo.style.display = '';
   const top = combos.slice(0, 10);
   renderStratChart(
     top.map(s => s.tags.join('+')),
@@ -1634,6 +1753,8 @@ function renderComboView() {
 }
 
 function renderOptimizer() {
+  const winBar = document.getElementById('strat-timewin-bar');
+  if (winBar) winBar.style.display = 'none';
   const loaded = trades.filter(t => t._pp != null);
   const cnt = document.getElementById('strat-count');
   if (cnt) cnt.textContent = `${loaded.length} trades analysed`;
@@ -1655,13 +1776,9 @@ function renderOptimizer() {
   const confidence = loaded.length < 5 ? 'low' : loaded.length < 10 ? 'moderate' : 'good';
   const confCol = confidence === 'low' ? 'var(--red)' : confidence === 'moderate' ? 'var(--acc)' : 'var(--green)';
 
-  // Chart: strong vs weak tags
-  const topTags = [...strongTags.slice(0, 5), ...weakTags.slice(0, 3)];
-  renderStratChart(
-    topTags.map(s => s.tag),
-    topTags.map(s => parseFloat(s.avgRet.toFixed(2))),
-    'Avg Return % (strongest vs weakest)'
-  );
+  // Optimizer shows no chart — table and insight cards only
+  const sp = document.getElementById('strat-chart-panel');
+  if (sp) sp.style.display = 'none';
 
   // Optimizer results
   const optEl = document.getElementById('optimizer-out');
@@ -1688,6 +1805,21 @@ function renderOptimizer() {
         <div class="opt-card-body">
           ${worstCombo ? `<div class="combo-chip" style="margin-bottom:6px">${worstCombo.tags.map(tagHtml).join('')}</div>
           Avg return <strong>${(worstCombo.avgRet >= 0 ? '+' : '')}${worstCombo.avgRet.toFixed(2)}%</strong> · Win rate <strong>${worstCombo.winRate.toFixed(0)}%</strong> · <span style="font-family:var(--mono);font-size:10px">n=${worstCombo.count}</span>` : 'Not enough combo data.'}
+        </div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-card-title">⏱ Best Exit Day by Tag</div>
+        <div class="opt-card-body">
+          ${tagStats.filter(s=>s.avgExitDay!==null).length===0
+            ? 'Not enough daily data. Load Charts tab first to fetch daily prices.'
+            : '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:4px">' +
+              tagStats.filter(s=>s.avgExitDay!==null).sort((a,b)=>b.score-a.score).slice(0,12).map(s=>`
+              <div style="background:var(--bg3);border-radius:7px;padding:8px 11px;border:1px solid var(--border)">
+                <div style="margin-bottom:4px">${tagHtml(s.tag)}</div>
+                <div style="font-family:var(--mono);font-size:11px">Best exit: <strong>day ${s.avgExitDay}</strong></div>
+                <div style="font-family:var(--mono);font-size:10px;color:var(--txt3)">${s.count} trade${s.count!==1?'s':''} · avg peak</div>
+              </div>`).join('') +
+              '</div>'}
         </div>
       </div>
       <div class="opt-card">
@@ -1802,6 +1934,61 @@ function addCustomTag(){
   }
   refreshSelArea();
 }
+
+// ── STOCK TAG SUGGESTIONS ────────────────────────────────────────────────
+const STOCK_META = {
+  AAPL:['#large-cap','#tech','#us'],   MSFT:['#large-cap','#tech','#us'],
+  GOOGL:['#large-cap','#tech','#us'],  GOOG:['#large-cap','#tech','#us'],
+  AMZN:['#large-cap','#tech','#us'],   META:['#large-cap','#tech','#us'],
+  NVDA:['#large-cap','#tech','#us','#ai','#semiconductor'],
+  TSLA:['#large-cap','#tech','#us','#ev'],
+  ORCL:['#large-cap','#tech','#us'],   ADBE:['#large-cap','#tech','#us'],
+  INTC:['#large-cap','#tech','#us','#semiconductor'],
+  AMD:['#large-cap','#tech','#us','#semiconductor','#ai'],
+  QCOM:['#large-cap','#tech','#us','#semiconductor'],
+  PLTR:['#mid-cap','#tech','#us','#ai'],
+  SMCI:['#mid-cap','#tech','#us'],
+  JPM:['#large-cap','#financials','#us'],  BAC:['#large-cap','#financials','#us'],
+  GS:['#large-cap','#financials','#us'],   MS:['#large-cap','#financials','#us'],
+  V:['#large-cap','#financials','#us'],    MA:['#large-cap','#financials','#us'],
+  'BRK-B':['#large-cap','#financials','#us'],
+  SCHW:['#mid-cap','#financials','#us'],   UNH:['#large-cap','#healthcare','#us'],
+  JNJ:['#large-cap','#healthcare','#us'],  PFE:['#large-cap','#healthcare','#us'],
+  ABBV:['#large-cap','#healthcare','#us'], LLY:['#large-cap','#healthcare','#us'],
+  ASML:['#large-cap','#tech','#eu','#semiconductor'],
+  SAP:['#large-cap','#tech','#eu'],
+  XOM:['#large-cap','#energy','#us'],  CVX:['#large-cap','#energy','#us'],
+  CAT:['#large-cap','#industrials','#us'], BA:['#large-cap','#industrials','#us'],
+};
+function getStockSuggestedTags(ticker, stockName, exchange) {
+  const k = ticker.toUpperCase().replace('-','_').replace('-','');
+  const direct = STOCK_META[ticker.toUpperCase()] || STOCK_META[k];
+  if (direct) return direct;
+  const tags = [];
+  const ex = (exchange||'').toLowerCase();
+  const nm = (stockName||'').toLowerCase();
+  if (['nasdaq','nyse','amex'].some(e=>ex.includes(e))) tags.push('#us');
+  else if (['xetra','euronext','lse','xpar','xams'].some(e=>ex.includes(e))) tags.push('#eu');
+  if (['bank','financial','insurance','capital'].some(w=>nm.includes(w))) tags.push('#financials');
+  else if (['pharma','biotech','health','therapeut'].some(w=>nm.includes(w))) tags.push('#healthcare');
+  else if (['tech','software','cloud','digital','semi'].some(w=>nm.includes(w))) tags.push('#tech');
+  else if (['energy','oil','gas','power'].some(w=>nm.includes(w))) tags.push('#energy');
+  return tags;
+}
+function renderStockSuggestedTags(tags) {
+  const zone = document.getElementById('stock-sug-zone');
+  const chips = document.getElementById('stock-tag-chips');
+  if (!zone || !chips) return;
+  if (!tags.length) { zone.style.display='none'; return; }
+  zone.style.display='';
+  chips.innerHTML='';
+  tags.forEach(tag => {
+    const c2=document.createElement('span');
+    c2.className=`pick-chip ${tCls(tag)}`;c2.textContent=tag;
+    c2.onclick=()=>toggleTag(tag);
+    chips.appendChild(c2);
+  });
+}
 document.getElementById('f-lookup').onclick=async()=>{
   const t=(document.getElementById('f-ticker')?.value||'').trim().toUpperCase();
   const d=document.getElementById('f-date')?.value||new Date().toISOString().split('T')[0];
@@ -1810,9 +1997,10 @@ document.getElementById('f-lookup').onclick=async()=>{
   try{
     const q=await fetchPriceAt(t,d);
     if(hint){hint.textContent=`${q.name||t} · ${fp(q.price,q.currency)} on ${fd(d)}`;hint.className='th2';}
-    const pi=document.getElementById('f-price');if(pi&&!pi.value&&q.price)pi.value=q.price.toFixed(2);
+    const pi=document.getElementById('f-price');if(pi&&q.price)pi.value=q.price.toFixed(2); // always replace on lookup
     if(editId===null)trades.filter(tr=>tr.ticker.toUpperCase()===t).forEach(tr=>tr.tags.forEach(g=>selTags.add(g)));
     refreshSelArea();
+    renderStockSuggestedTags(getStockSuggestedTags(t, q.name||'', q.exchange||''));
   }catch(e){if(hint){hint.textContent='Ticker not found';hint.className='th2 err';}}
 };
 document.getElementById('f-date').onchange=async()=>{
@@ -1851,7 +2039,7 @@ function clearForm(){
   editId=null;['f-ticker','f-shares','f-price','f-reason'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
   const hint=document.getElementById('f-hint');if(hint){hint.textContent='';hint.className='th2';}
-  selTags.clear();buildTagPicker();setAction('buy');
+  selTags.clear();buildTagPicker();setAction('buy');renderStockSuggestedTags([]);
   document.getElementById('f-title').textContent='Add New Trade';
   document.getElementById('f-submit').textContent='➕ Add Trade';
   document.getElementById('f-banner').classList.remove('show');
