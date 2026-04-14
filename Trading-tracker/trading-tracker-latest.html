@@ -143,11 +143,10 @@ body::before{content:'';position:fixed;inset:0;background:var(--dec,none);pointe
 .ab{padding:3px 8px;border-radius:5px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .ab.buy{background:var(--gbg);color:var(--green);border:1px solid var(--gbdr)}
 .ab.sell{background:var(--rbg);color:var(--red);border:1px solid var(--rbdr)}
-/* Tag categories — 4 semantic colour classes */
-.tc-suggested{background:#ede9fe;color:#6d28d9;border-color:#c4b5fd}   /* violet — suggested-by */
-.tc-analyst{background:#cffafe;color:#0e7490;border-color:#67e8f9}      /* teal   — analyst name */
-.tc-strategy{background:#fef3c7;color:#92400e;border-color:#fcd34d}     /* amber  — strategy tag */
-.tc-other{background:#f1f5f9;color:#334155;border-color:#cbd5e1}        /* slate  — everything else */
+.tc-suggested{background:#ede9fe;color:#6d28d9;border-color:#c4b5fd}
+.tc-analyst{background:#cffafe;color:#0e7490;border-color:#67e8f9}
+.tc-strategy{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+.tc-other{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
 .tp10{background:#fdf4ff;color:#7e22ce;border-color:#e9d5ff}
 .tp11{background:#ecfdf5;color:#047857;border-color:#6ee7b7}
 /* ════════════ UPLOAD ════════════ */
@@ -340,6 +339,15 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 .opt-xwin-btn{padding:4px 9px;font-family:var(--mono);font-size:10px;border:none;background:none;color:var(--txt3);cursor:pointer;border-radius:5px;transition:all .15s;letter-spacing:.04em}
 .opt-xwin-btn:hover{color:var(--txt2)}
 .opt-xwin-btn.active{background:var(--bg2);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+.err-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99999;align-items:center;justify-content:center}
+.err-overlay.on{display:flex}
+.err-box{background:#1a1a1a;border:2px solid #f06292;border-radius:12px;padding:22px 26px;max-width:560px;width:90%;font-family:'DM Mono',monospace}
+.err-box h3{color:#f06292;font-size:15px;margin-bottom:10px}
+.err-box pre{background:#111;border-radius:6px;padding:12px;font-size:11px;color:#d0d9f0;overflow-x:auto;white-space:pre-wrap;word-break:break-all;max-height:220px;overflow-y:auto;margin-bottom:12px}
+.err-box .err-note{font-size:11px;color:#8896aa;margin-bottom:12px;line-height:1.5}
+.err-copy{background:#f06292;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer}
+.err-close{background:transparent;border:1px solid #555;color:#999;border-radius:6px;padding:7px 14px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;margin-left:8px}
 </style>
 </head>
 <body>
@@ -590,13 +598,13 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
       </div>
       <div class="s-card">
         <h4>🏷️ Tag Categories</h4>
-        <p class="s-desc">Customise which tags are coloured as <strong style="color:#92400e">Strategy</strong> tags (amber). Suggested-by tags are always violet, analyst names always teal, everything else slate.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;min-height:28px" id="strategy-tag-list"></div>
-        <div style="display:flex;gap:6px;margin-bottom:8px">
-          <input type="text" id="strategy-tag-input" placeholder="#strategy-tag" style="flex:1;font-size:11px;padding:5px 9px"/>
-          <button class="btn btn-sm" onclick="addStrategyTag()">Add</button>
+        <p class="s-desc">Strategy tags (amber) are user-defined. Suggested-by tags are always violet, analyst names (#First-Last) always teal.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;min-height:28px;margin-bottom:10px" id="strategy-tag-list"></div>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input type="text" id="strategy-tag-input" placeholder="#my-strategy-tag" style="flex:1;font-size:11px;padding:5px 9px"/>
+          <button class="btn btn-sm" onclick="addStrategyTagFromSettings()">Add</button>
         </div>
-        <p style="font-family:var(--mono);font-size:10px;color:var(--txt3);line-height:1.5">Click a tag to remove it from the strategy category.</p>
+        <p style="font-family:var(--mono);font-size:10px;color:var(--txt3)">Click a tag chip to remove it.</p>
       </div>
       <div class="s-card">
         <h4>&#8505;&#65039; About</h4>
@@ -612,21 +620,36 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 
 <script>
 'use strict';
+window.onerror=function(msg,src,line,col,err){
+  const box=document.getElementById('err-overlay');
+  const txt=document.getElementById('err-text');
+  if(box&&txt){
+    txt.textContent='Error: '+msg+'\nFile: '+(src||'?')+'\nLine: '+(line||'?')+', Col: '+(col||'?')+'\nStack: '+(err?.stack||'n/a');
+    box.classList.add('on');
+  }
+  return false; // don't suppress, still log to console
+};
+window.onunhandledrejection=function(e){
+  const box=document.getElementById('err-overlay');
+  const txt=document.getElementById('err-text');
+  if(box&&txt){
+    txt.textContent='Unhandled Promise Rejection:\n'+(e.reason?.stack||e.reason||'unknown');
+    box.classList.add('on');
+  }
+};
+
 // ── CONSTANTS ──
 const PERIODS=[{label:'1W',days:7},{label:'1M',days:30},{label:'3M',days:90},{label:'6M',days:180},{label:'1Y',days:365}];
-const LINE_COLS=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899','#84cc16','#6366f1','#14b8a6','#e11d48'];
-
-// ── TAG CATEGORY SYSTEM ─────────────────────────────────────────────────────
-// Cat 0 (violet) — tag contains 'suggested'
-// Cat 1 (teal)   — analyst name: #Firstname-Lastname (each segment capitalised)
-// Cat 2 (amber)  — strategy tags (user-editable in Settings)
-// Cat 3 (slate)  — everything else
+// Tag category system — replaces PAL hash approach
 let strategyTags=JSON.parse(localStorage.getItem('tj_strategy_tags')||'["#dip-buy","#reversal","#cluster","#breakout","#swing","#earnings-play","#momentum"]');
 function saveStrategyTags(){localStorage.setItem('tj_strategy_tags',JSON.stringify(strategyTags));}
 const TAG_CAT_CSS=['tc-suggested','tc-analyst','tc-strategy','tc-other'];
 function isAnalystTag(tag){
   const parts=(tag.startsWith('#')?tag.slice(1):tag).split('-');
-  return parts.length>=2&&parts.every(p=>p.length>0&&/[A-Z]/.test(p[0])&&!/^(large|mid|small|micro|high|medium|low|dip|suggested|stop|thesis)$/i.test(p));
+  if(parts.length<2)return false;
+  // Each part must start with uppercase; exclude known non-analyst prefixes
+  const skip=/^(large|mid|small|micro|high|medium|low|dip|stop|thesis|us|eu|uk|ai|ev)$/i;
+  return parts.every(p=>p.length>0&&/[A-Z]/.test(p[0])&&!skip.test(p));
 }
 function tagCat(tag){
   if(tag.toLowerCase().includes('suggested'))return 0;
@@ -634,15 +657,319 @@ function tagCat(tag){
   if(strategyTags.map(s=>s.toLowerCase()).includes(tag.toLowerCase()))return 2;
   return 3;
 }
-function tCls(tag){return TAG_CAT_CSS[tagCat(tag)];}
-function tagHtml(tag){return`<span class="tc2 ${tCls(tag)}">${esc(tag)}</span>`;}
-function sortTags(tags){return[...tags].sort((a,b)=>{const ca=tagCat(a),cb=tagCat(b);return ca!==cb?ca-cb:a.localeCompare(b);});}
-function normTags(t){
-  if(!t)return[];
-  const arr=typeof t==='string'?t.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean):Array.isArray(t)?t.map(x=>String(x).trim()).filter(Boolean):[];
-  return arr.map(x=>x.startsWith('#')?x:'#'+x);
+function sortTagList(tags){return[...tags].sort((a,b)=>{const ca=tagCat(a),cb=tagCat(b);return ca!==cb?ca-cb:a.localeCompare(b);});}
+const LINE_COLS=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899','#84cc16','#6366f1','#14b8a6','#e11d48'];
+const THEME_LOGO={'light':'candle','dark':'wave','midnight':'candle','forest':'candle','dusk':'wave'};
+
+// ── LOGO STYLES ──
+const LOGOS={
+  wave:{label:'Wave',mk:()=>`<svg width="22" height="17" viewBox="0 0 22 17" fill="none"><polyline points="0,13 4,8 8,10 12,4 17,2 22,1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="0" y1="17" x2="22" y2="17" stroke="currentColor" stroke-width="1" opacity="0.35"/></svg>`},
+  candle:{label:'Candle',mk:()=>`<svg width="18" height="22" viewBox="0 0 18 22" fill="none"><line x1="4.5" y1="1" x2="4.5" y2="4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="1" y="4" width="7" height="8" rx="1.2" fill="currentColor"/><line x1="4.5" y1="12" x2="4.5" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="13.5" y1="5" x2="13.5" y2="8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="10" y="8" width="7" height="9" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="17" x2="13.5" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`},
+};
+
+// ── STATE ──
+let trades=[],fileHandle=null,fileName='',cacheW={},cacheD={};
+let cardCharts={},optChart=null;
+let chartsBuilt=false,ovBuilt=false;
+let rSort='date',rDir='asc',rFilter='all',rTag='__all__';
+let cSort='date-asc',cFilter='all',cTag='__all__';
+let newAction='buy',selTags=new Set(),editId=null;
+let tlSC='date',tlSD='desc';
+let optMode=localStorage.getItem('tj_opt_mode')||'dual'; // 'tall'|'dual'
+let optXWindow=0; // 0=all, 30=1M, 90=3M, 180=6Mll' | 'dual'
+let retryTimers={};
+const hasFSA='showOpenFilePicker' in window;
+
+// ── THEME & LOGO ──
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('tj_theme',t);
+  document.querySelectorAll('.th-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===t));
+  const ov=localStorage.getItem('tj_logo_override');
+  if(!ov||ov==='theme-default') renderLogo();
 }
-function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return sortTags([...s]);}
+function setLogoStyle(s){
+  if(s==='theme-default') localStorage.removeItem('tj_logo_override');
+  else localStorage.setItem('tj_logo_override',s);
+  renderLogo();
+  document.querySelectorAll('.lo-opt').forEach(o=>o.classList.toggle('active',o.dataset.logo===s));
+}
+function curLogo(){
+  const ov=localStorage.getItem('tj_logo_override');
+  if(ov&&ov!=='theme-default'&&LOGOS[ov]) return ov;
+  return THEME_LOGO[document.documentElement.getAttribute('data-theme')||'light']||'candle';
+}
+function renderLogo(){
+  const s=curLogo(),def=LOGOS[s]||LOGOS.wave;
+  const mk=document.getElementById('logo-mk');
+  if(mk) mk.innerHTML=def.mk();
+  document.querySelectorAll('.lo-opt').forEach(o=>o.classList.toggle('active',o.dataset.logo===s));
+}
+function buildLogoOpts(){
+  const wrap=document.getElementById('logo-opts');if(!wrap)return;wrap.innerHTML='';
+  const cur=curLogo();
+  Object.entries(LOGOS).forEach(([k,d])=>{
+    const el=document.createElement('div');
+    el.className='lo-opt'+(k===cur?' active':'');el.dataset.logo=k;el.onclick=()=>setLogoStyle(k);
+    el.innerHTML=`<div class="lo-prev">${d.mk()}</div><span class="lo-lbl">${d.label}</span>`;
+    wrap.appendChild(el);
+  });
+}
+// Apply saved theme immediately (sync, before any rendering)
+(()=>{
+  const VALID_THEMES=['light','midnight','forest','dusk'];
+  const stored=localStorage.getItem('tj_theme');
+  // If stored theme is invalid (e.g. 'dark'/'pro'/'steel' from old version), reset to light
+  const t=(stored&&VALID_THEMES.includes(stored))?stored:'light';
+  if(stored&&!VALID_THEMES.includes(stored)) localStorage.setItem('tj_theme','light');
+  document.documentElement.setAttribute('data-theme',t);
+  renderLogo();
+  document.querySelectorAll('.th-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===t));
+})();
+
+// ── IndexedDB ──
+let _idb=null;
+async function openIDB(){if(_idb)return _idb;return new Promise((a,b)=>{const r=indexedDB.open('TJ3',1);r.onupgradeneeded=e=>e.target.result.createObjectStore('s');r.onsuccess=e=>{_idb=e.target.result;a(_idb);};r.onerror=b;});}
+async function idbSet(k,v){const db=await openIDB();return new Promise((a,b)=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(v,k);tx.oncomplete=a;tx.onerror=b;});}
+async function idbGet(k){const db=await openIDB();return new Promise((a,b)=>{const tx=db.transaction('s','readonly');const r=tx.objectStore('s').get(k);r.onsuccess=()=>a(r.result);r.onerror=b;});}
+
+// ── DATA FETCHING — MULTI-SOURCE, MULTI-PROXY ──────────────────────────────
+// Strategy: try a pool of proxies intelligently; rank by speed on first test;
+// fall back to Stooq.com (CSV) when Yahoo fails entirely.
+
+let fetchStrategy = localStorage.getItem('tj_fetch_strategy') || 'race';
+let proxyRankings = JSON.parse(localStorage.getItem('tj_proxy_rankings') || '[]');
+let proxyRotateIdx = 0;
+
+// All available CORS proxies — ranked by reliability in practice
+const PROXY_POOL = [
+  { name: 'corsproxy.io',      fn: u => `https://corsproxy.io/?url=${encodeURIComponent(u)}` },
+  { name: 'allorigins',        fn: u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}` },
+  { name: 'codetabs',          fn: u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}` },
+  { name: 'cors.sh',           fn: u => `https://proxy.cors.sh/${u}` },
+  { name: 'corsanywhere-demo', fn: u => `https://cors-anywhere.herokuapp.com/${u}` },
+  { name: 'thingproxy',        fn: u => `https://thingproxy.freeboard.io/fetch/${u}` },
+  { name: 'yacdn',             fn: u => `https://yacdn.org/serve/${u}` },
+  { name: 'api.cors.lol',      fn: u => `https://api.cors.lol/?url=${encodeURIComponent(u)}` },
+];
+
+// Get ordered proxy list: use rankings if available, else default order
+function getOrderedProxies() {
+  if (proxyRankings.length > 0) {
+    const ranked = proxyRankings
+      .map(name => PROXY_POOL.find(p => p.name === name))
+      .filter(Boolean);
+    const rest = PROXY_POOL.filter(p => !proxyRankings.includes(p.name));
+    return [...ranked, ...rest];
+  }
+  return PROXY_POOL;
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function tryProxy(proxy, url, timeoutMs = 12000) {
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(proxy.fn(url), { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const text = await r.text();
+    // Some proxies return empty or error HTML
+    if (!text || text.trim().startsWith('<')) throw new Error('Non-JSON response');
+    return JSON.parse(text);
+  } catch(e) { clearTimeout(tid); throw e; }
+}
+
+// ── Race: all proxies fire in parallel with stagger ──
+async function fetchRace(url) {
+  const proxies = getOrderedProxies();
+  for (let attempt = 0; attempt < 2; attempt++) {
+    if (attempt > 0) await sleep(4000);
+    try {
+      return await new Promise((resolve, reject) => {
+        let settled = false, failed = 0;
+        const settle = (v, ok) => { if (settled) return; settled = true; ok ? resolve(v) : reject(v); };
+        proxies.forEach((p, i) => {
+          // Best proxy first; each subsequent one delayed by 1.8s
+          setTimeout(async () => {
+            if (settled) return;
+            try { settle(await tryProxy(p, url, 12000), true); }
+            catch(e) { if (!settled) { failed++; if (failed === proxies.length) settle(new Error('All failed'), false); } }
+          }, i * 1800);
+        });
+        setTimeout(() => settle(new Error('Timeout'), false), 25000);
+      });
+    } catch(e) { if (attempt === 1) throw e; }
+  }
+}
+
+// ── Rotate: round-robin across proxies ──
+async function fetchRotate(url) {
+  const proxies = getOrderedProxies();
+  const start = proxyRotateIdx;
+  proxyRotateIdx = (proxyRotateIdx + 1) % proxies.length;
+  for (let i = 0; i < proxies.length; i++) {
+    try { return await tryProxy(proxies[(start + i) % proxies.length], url, 14000); }
+    catch(e) { if (i < proxies.length - 1) await sleep(1200); }
+  }
+  throw new Error('All proxies failed');
+}
+
+// ── Patient: sequential, generous timeouts ──
+async function fetchPatient(url) {
+  const proxies = getOrderedProxies();
+  for (let i = 0; i < proxies.length; i++) {
+    try { return await tryProxy(proxies[i], url, 18000); }
+    catch(e) { if (i < proxies.length - 1) await sleep(2500); }
+  }
+  throw new Error('All proxies failed');
+}
+
+// ── Throttle: 1 at a time, patient ──
+async function fetchThrottle(url) { return fetchPatient(url); }
+
+// ── Main dispatch ──
+async function fetchSmart(url) {
+  switch (fetchStrategy) {
+    case 'race':     return fetchRace(url);
+    case 'rotate':   return fetchRotate(url);
+    case 'patient':  return fetchPatient(url);
+    case 'throttle': return fetchThrottle(url);
+    default:         return fetchRace(url);
+  }
+}
+
+// ── Stooq fallback (CSV, no auth needed) ──
+// Stooq ticker format: AAPL.US, MSFT.US, TSLA.US, etc.
+async function fetchStooq(ticker, fromDate) {
+  const k = ticker.toUpperCase();
+  const stooqTicker = k.includes('.') ? k.toLowerCase() : k.toLowerCase() + '.us';
+  const d1 = fromDate.replace(/-/g, '');
+  const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+  const csvUrl = `https://stooq.com/q/d/l/?s=${stooqTicker}&d1=${d1}&d2=${today}&i=d`;
+  const proxies = getOrderedProxies();
+  for (let i = 0; i < Math.min(proxies.length, 4); i++) {
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 12000);
+      const r = await fetch(proxies[i].fn(csvUrl), { signal: ctrl.signal });
+      clearTimeout(tid);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const csv = await r.text();
+      if (!csv || csv.includes('No data') || csv.trim().startsWith('<')) throw new Error('No CSV data');
+      // Parse CSV: Date,Open,High,Low,Close,Volume
+      const lines = csv.trim().split('\n').slice(1); // skip header
+      const pts = lines.map(l => {
+        const cols = l.split(',');
+        const date = cols[0]?.trim();
+        const close = parseFloat(cols[4]);
+        return date && !isNaN(close) ? { date, close } : null;
+      }).filter(Boolean).sort((a, b) => a.date.localeCompare(b.date));
+      if (pts.length === 0) throw new Error('Empty CSV');
+      return { pts, meta: { name: ticker, currency: 'USD', lastPrice: pts.at(-1)?.close || null } };
+    } catch(e) { if (i < 3) await sleep(1000); }
+  }
+  throw new Error('Stooq also failed');
+}
+
+// ── Full fetch with Yahoo → Stooq fallback ──
+async function fetchWithFallback(url, ticker, fromDate) {
+  try {
+    return parseYahoo(await fetchSmart(url));
+  } catch(yahooErr) {
+    // Try Stooq as fallback
+    try {
+      return await fetchStooq(ticker, fromDate);
+    } catch(stooqErr) {
+      throw new Error(`Yahoo: ${yahooErr.message} | Stooq: ${stooqErr.message}`);
+    }
+  }
+}
+
+// ── Proxy speed test ──
+async function pingProxies() {
+  const testUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=5d';
+  const results = await Promise.allSettled(
+    PROXY_POOL.map(async p => {
+      const t0 = Date.now();
+      await tryProxy(p, testUrl, 8000);
+      return { name: p.name, ms: Date.now() - t0 };
+    })
+  );
+  const ranked = results
+    .map((r, i) => ({ name: PROXY_POOL[i].name, ok: r.status === 'fulfilled', ms: r.status === 'fulfilled' ? r.value.ms : null }))
+    .filter(r => r.ok)
+    .sort((a, b) => a.ms - b.ms);
+  // Persist ranking of working proxies
+  proxyRankings = ranked.map(r => r.name);
+  localStorage.setItem('tj_proxy_rankings', JSON.stringify(proxyRankings));
+  return results.map((r, i) => ({ name: PROXY_POOL[i].name, ok: r.status === 'fulfilled', ms: r.status === 'fulfilled' ? r.value.ms : null }));
+}
+
+function parseYahoo(j) {
+  const res = j?.chart?.result?.[0]; if (!res) throw new Error('No data');
+  const ts = res.timestamp || [];
+  const cl = res.indicators?.adjclose?.[0]?.adjclose || res.indicators?.quote?.[0]?.close || [];
+  const m = res.meta || {};
+  const pts = ts.map((t, i) => ({ date: tsD(t), close: cl[i] })).filter(d => d.close != null && d.close > 0);
+  return { pts, meta: { name: m.longName || m.shortName || m.symbol || '', currency: m.currency || 'USD', exchange: m.exchangeName || m.fullExchangeName || '', lastPrice: m.regularMarketPrice || pts.at(-1)?.close || null } };
+}
+function tsD(ts) { return new Date(ts * 1000).toISOString().split('T')[0]; }
+
+class FQ { constructor(n){this.n=n;this.r=0;this.q=[];} add(fn){return new Promise((a,b)=>{this.q.push({fn,a,b});this._r();});} _r(){while(this.r<this.n&&this.q.length){const{fn,a,b}=this.q.shift();this.r++;fn().then(a,b).finally(()=>{this.r--;this._r();}); }}}
+function getConcurrency() { return fetchStrategy === 'throttle' ? 1 : 3; }
+let fqW=new FQ(getConcurrency()),fqD=new FQ(getConcurrency());
+function rebuildQueues(){fqW=new FQ(getConcurrency());fqD=new FQ(getConcurrency());}
+
+async function fetchW(ticker, fromDate) {
+  const k = ticker.toUpperCase();
+  if (cacheW[k]) return cacheW[k]; // includes failed sentinel
+  const p1 = Math.floor(new Date(fromDate + 'T00:00:00Z').getTime() / 1000);
+  const p2 = Math.floor(Date.now() / 1000) + 86400;
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1wk&period1=${p1}&period2=${p2}`;
+  const d = await fetchWithFallback(yahooUrl, k, fromDate);
+  cacheW[k] = d; return d;
+}
+async function fetchD(ticker, fromDate) {
+  const k = ticker.toUpperCase();
+  if (cacheD[k]) return cacheD[k];
+  const p1 = Math.floor(new Date(fromDate + 'T00:00:00Z').getTime() / 1000);
+  const p2 = Math.floor(Date.now() / 1000) + 86400;
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}&includeAdjustedClose=true`;
+  const d = await fetchWithFallback(yahooUrl, k, fromDate);
+  cacheD[k] = d; return d;
+}
+async function fetchPriceAt(ticker, date) {
+  const k = ticker.toUpperCase();
+  const p1 = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000) - 86400 * 6;
+  const p2 = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000) + 86400 * 10;
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(k)}?interval=1d&period1=${p1}&period2=${p2}`;
+  const d = await fetchWithFallback(yahooUrl, k, date);
+  const today = new Date().toISOString().split('T')[0];
+  const target = date > today ? today : date;
+  const pt = d.pts.find(p => p.date >= target) || d.pts.at(-1);
+  return { price: pt?.close || null, name: d.meta.name, currency: d.meta.currency || 'USD', exchange: d.meta.exchange || '' };
+}
+
+// ── HELPERS ──
+function priceAt(pts,td){
+  if(!pts?.length)return null;const today=new Date().toISOString().split('T')[0];if(td>today)return null;
+  const p=pts.find(p=>p.date>=td);if(!p)return pts.at(-1)?.close||null;
+  if(Math.round((new Date(p.date)-new Date(td))/86400000)>15)return null;return p.close;
+}
+function addDays(d,n){const dt=new Date(d+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+n);return dt.toISOString().split('T')[0];}
+function pctRet(ep,cp){if(!ep||!cp)return null;return(cp-ep)/ep*100;}
+function ttg(tradeDate,days){const diff=Math.ceil((new Date(tradeDate+'T12:00:00Z').getTime()+days*86400000-Date.now())/86400000);if(diff<=0)return null;return diff<14?diff+'d':Math.ceil(diff/7)+'w';}
+function fp(v,c='USD'){if(v==null||isNaN(v))return'—';const s={USD:'$',EUR:'€',GBP:'£',JPY:'¥',CHF:'Fr',CAD:'C$',AUD:'A$'};return(s[c]||'$')+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fps(v,c='USD'){if(v==null||isNaN(v))return'—';const s={USD:'$',EUR:'€',GBP:'£'};if(Math.abs(v)>=1000)return(s[c]||'$')+(v/1000).toFixed(1)+'k';return(s[c]||'$')+v.toFixed(0);}
+function fd(s){if(!s)return'—';return new Date(s+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function showT(m,t=''){const el=document.getElementById('toast');el.textContent=m;el.className='toast on'+(t?' '+t:'');clearTimeout(el._x);el._x=setTimeout(()=>{el.className='toast';},3200);}
+function tCls(tag){return TAG_CAT_CSS[tagCat(tag)];}
+function tagHtml(t){return`<span class="tc2 ${tCls(t)}">${esc(t)}</span>`;}
+function normTags(t){if(!t)return[];if(typeof t==='string')return t.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);if(Array.isArray(t))return t.map(x=>String(x).trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);return[];}
+function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return sortTagList([...s]);}
 function earliest(){const e={};trades.forEach(t=>{const k=t.ticker.toUpperCase();if(!e[k]||t.date<e[k])e[k]=t.date;});return e;}
 
 // ── FILE HANDLING ──
@@ -1631,17 +1958,16 @@ function buildNTTab(){
 function setAction(a){newAction=a;document.getElementById('f-buy').className=a==='buy'?'ab-buy':'';document.getElementById('f-sell').className=a==='sell'?'ab-sell':'';}
 function buildTagPicker(filter=''){
   const at=allTags();const chips=document.getElementById('tag-chips');if(!chips)return;
-  const filtered=filter?at.filter(t=>t.toLowerCase().includes(filter.toLowerCase())):at;
+  const shown=filter?at.filter(t=>t.toLowerCase().includes(filter.toLowerCase())):at;
   chips.innerHTML='';document.getElementById('sug-zone').style.display=at.length?'':'none';
-  filtered.forEach(tag=>{
+  shown.forEach(tag=>{
     const sp=document.createElement('span');sp.className=`pick-chip ${tCls(tag)}`;sp.textContent=tag;
-    sp.onclick=()=>{toggleTag(tag);document.getElementById('tag-custom').value='';buildTagPicker('');};
+    sp.onclick=()=>{toggleTag(tag);const inp=document.getElementById('tag-custom');if(inp){inp.value='';buildTagPicker('');}};
     chips.appendChild(sp);
   });
-  // Show hint if filter active and no matches
-  if(filter&&!filtered.length){
-    const hint=document.createElement('span');hint.style.cssText='font-family:var(--mono);font-size:10px;color:var(--txt3);font-style:italic';
-    hint.textContent='No matching tags — press Enter to create';chips.appendChild(hint);
+  if(filter&&!shown.length){
+    const h=document.createElement('span');h.style.cssText='font-family:var(--mono);font-size:10px;color:var(--txt3);font-style:italic';
+    h.textContent='No match — press Enter to create';chips.appendChild(h);
   }
   refreshSelArea();
 }
@@ -1650,31 +1976,18 @@ function refreshSelArea(){
   const area=document.getElementById('sel-tags');if(!area)return;area.innerHTML='';
   if(!selTags.size){area.classList.add('empty');return;}
   area.classList.remove('empty');
-  sortTags([...selTags]).forEach(tag=>{const s=document.createElement('span');s.className=`s-chip ${tCls(tag)}`;s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
+  sortTagList([...selTags]).forEach(tag=>{const s=document.createElement('span');s.className=`s-chip ${tCls(tag)}`;s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
   document.querySelectorAll('#tag-chips .pick-chip').forEach(c=>{c.style.opacity=selTags.has(c.textContent)?.2:.6;});
 }
 window.rmTag=t=>{selTags.delete(t);refreshSelArea();};
 document.getElementById('tag-add-btn').onclick=addCustomTag;
-document.getElementById('tag-custom').addEventListener('input', e=>{
-  buildTagPicker(e.target.value.replace(/^#/,''));
-});
+document.getElementById('tag-custom').addEventListener('input',e=>{buildTagPicker(e.target.value.replace(/^#/,''));});
 document.getElementById('tag-custom').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addCustomTag();}};
 function addCustomTag(){
   const inp=document.getElementById('tag-custom');if(!inp)return;
   let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;
   inp.value='';selTags.add(val);
-  // If this tag doesn't exist yet, add chip directly so it shows
-  const chips=document.getElementById('tag-chips');
-  if(chips&&![...chips.querySelectorAll('.pick-chip')].find(el=>el.textContent===val)){
-    const sp=document.createElement('span');sp.className=`pick-chip ${tCls(val)}`;sp.textContent=val;
-    sp.onclick=()=>{toggleTag(val);document.getElementById('tag-custom').value='';buildTagPicker('');};
-    // Insert in sorted position
-    const allSorted=sortTags([...chips.querySelectorAll('.pick-chip')].map(el=>el.textContent).concat(val));
-    const pos=allSorted.indexOf(val);
-    const after=chips.querySelectorAll('.pick-chip')[pos];
-    chips.insertBefore(sp,after||null);
-  }
-  buildTagPicker('');
+  buildTagPicker(''); // rebuild full list (new tag will appear if it exists in allTags)
   refreshSelArea();
 }
 
@@ -1879,9 +2192,27 @@ async function runPingTest(){
     if(status)status.textContent='Test failed: '+e.message;
   }
 }
+function buildStrategyTagsUI(){
+  const list=document.getElementById('strategy-tag-list');if(!list)return;
+  list.innerHTML='';
+  strategyTags.forEach(tag=>{
+    const sp=document.createElement('span');sp.className=`tc2 tc-strategy`;
+    sp.style.cursor='pointer';sp.title='Click to remove';
+    sp.innerHTML=esc(tag)+'<span style="margin-left:4px;opacity:.55">✕</span>';
+    sp.onclick=()=>{strategyTags=strategyTags.filter(t=>t!==tag);saveStrategyTags();buildStrategyTagsUI();};
+    list.appendChild(sp);
+  });
+}
+function addStrategyTagFromSettings(){
+  const inp=document.getElementById('strategy-tag-input');if(!inp)return;
+  let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;
+  val=val.toLowerCase();inp.value='';
+  if(!strategyTags.includes(val))strategyTags.push(val);
+  saveStrategyTags();buildStrategyTagsUI();
+}
 function buildSettingsTab(){
-  updateFileInfo();
   buildStrategyTagsUI();
+  updateFileInfo();
   const note=document.getElementById('fsa-note');
   if(note)note.textContent=hasFSA?'✓ File System Access supported. File auto-loads next session.':'⚠ Auto-load requires Chrome or Edge. Changes are downloaded as a new file.';
   const theme=document.documentElement.getAttribute('data-theme')||'light';
@@ -1890,33 +2221,10 @@ function buildSettingsTab(){
   buildLogoOpts();
   buildStrategyUI();
 }
-function buildStrategyTagsUI(){
-  const list=document.getElementById('strategy-tag-list');if(!list)return;
-  list.innerHTML='';
-  strategyTags.forEach(tag=>{
-    const sp=document.createElement('span');
-    sp.className='tc2 tc-strategy';
-    sp.style.cssText='cursor:pointer;user-select:none';
-    sp.title='Click to remove from strategy category';
-    sp.innerHTML=esc(tag)+'<span style="margin-left:4px;opacity:.6">✕</span>';
-    sp.onclick=()=>removeStrategyTag(tag);
-    list.appendChild(sp);
-  });
-}
-function addStrategyTag(){
-  const inp=document.getElementById('strategy-tag-input');if(!inp)return;
-  let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;
-  val=val.toLowerCase();inp.value='';
-  if(!strategyTags.includes(val))strategyTags.push(val);
-  saveStrategyTags();buildStrategyTagsUI();
-}
-function removeStrategyTag(tag){
-  strategyTags=strategyTags.filter(t=>t!==tag);
-  saveStrategyTags();buildStrategyTagsUI();
-}
 document.getElementById('s-pick').onclick=()=>hasFSA?pickFSA():document.getElementById('fi').click();
 document.getElementById('s-reload').onclick=async()=>{if(fileHandle)await loadHandle(fileHandle);else showT('No file handle','err');};
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement?.id==='strategy-tag-input'){e.preventDefault();addStrategyTag();}});
+document.getElementById('strategy-tag-input')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStrategyTagFromSettings();}});
+document.getElementById('strategy-tag-input')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStrategyTagFromSettings();}});
 
 // ── PROGRESS ──
 function setPB(p){const w=document.getElementById('pb-wrap'),b=document.getElementById('pb');if(p<=0){w.classList.remove('on');b.style.width='0%';return;}w.classList.add('on');b.style.width=p+'%';}
@@ -1934,5 +2242,15 @@ function hideLS(){document.getElementById('ls').classList.remove('on');}
   try{const h=await idbGet('fh');if(!h)return;const p=await h.queryPermission({mode:'readwrite'});if(p==='granted'){fileHandle=h;showT('Auto-loading…');await loadHandle(h);}}catch(e){}
 })();
 </script>
+
+<div class="err-overlay" id="err-overlay">
+  <div class="err-box">
+    <h3>⚠ JavaScript Error</h3>
+    <pre id="err-text"></pre>
+    <p class="err-note">Copy this message and paste it into your support chat for troubleshooting.</p>
+    <button class="err-copy" onclick="navigator.clipboard?.writeText(document.getElementById('err-text').textContent).then(()=>this.textContent='Copied!').catch(()=>this.textContent='Select + copy manually')">📋 Copy error</button>
+    <button class="err-close" onclick="document.getElementById('err-overlay').classList.remove('on')">Dismiss</button>
+  </div>
+</div>
 </body>
 </html>
