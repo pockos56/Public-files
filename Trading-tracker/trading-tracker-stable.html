@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Trading Journal v1.9.5</title>
+<title>Trading Journal v1.9.7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -143,16 +143,10 @@ body::before{content:'';position:fixed;inset:0;background:var(--dec,none);pointe
 .ab{padding:3px 8px;border-radius:5px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .ab.buy{background:var(--gbg);color:var(--green);border:1px solid var(--gbdr)}
 .ab.sell{background:var(--rbg);color:var(--red);border:1px solid var(--rbdr)}
-.tp0{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
-.tp1{background:#dcfce7;color:#15803d;border-color:#6ee7b7}
-.tp2{background:#fef3c7;color:#b45309;border-color:#fcd34d}
-.tp3{background:#fce7f3;color:#be185d;border-color:#f9a8d4}
-.tp4{background:#ede9fe;color:#6d28d9;border-color:#c4b5fd}
-.tp5{background:#cffafe;color:#0e7490;border-color:#67e8f9}
-.tp6{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}
-.tp7{background:#f0fdf4;color:#166534;border-color:#86efac}
-.tp8{background:#fff7ed;color:#c2410c;border-color:#fdba74}
-.tp9{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
+.tc-suggested{background:#ede9fe;color:#6d28d9;border-color:#c4b5fd}
+.tc-analyst{background:#cffafe;color:#0e7490;border-color:#67e8f9}
+.tc-strategy{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+.tc-other{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
 .tp10{background:#fdf4ff;color:#7e22ce;border-color:#e9d5ff}
 .tp11{background:#ecfdf5;color:#047857;border-color:#6ee7b7}
 /* ════════════ UPLOAD ════════════ */
@@ -345,6 +339,15 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 .opt-xwin-btn{padding:4px 9px;font-family:var(--mono);font-size:10px;border:none;background:none;color:var(--txt3);cursor:pointer;border-radius:5px;transition:all .15s;letter-spacing:.04em}
 .opt-xwin-btn:hover{color:var(--txt2)}
 .opt-xwin-btn.active{background:var(--bg2);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+.err-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99999;align-items:center;justify-content:center}
+.err-overlay.on{display:flex}
+.err-box{background:#1a1a1a;border:2px solid #f06292;border-radius:12px;padding:22px 26px;max-width:560px;width:90%;font-family:'DM Mono',monospace}
+.err-box h3{color:#f06292;font-size:15px;margin-bottom:10px}
+.err-box pre{background:#111;border-radius:6px;padding:12px;font-size:11px;color:#d0d9f0;overflow-x:auto;white-space:pre-wrap;word-break:break-all;max-height:220px;overflow-y:auto;margin-bottom:12px}
+.err-box .err-note{font-size:11px;color:#8896aa;margin-bottom:12px;line-height:1.5}
+.err-copy{background:#f06292;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer}
+.err-close{background:transparent;border:1px solid #555;color:#999;border-radius:6px;padding:7px 14px;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;margin-left:8px}
 </style>
 </head>
 <body>
@@ -594,12 +597,22 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
         <div id="ping-results" style="margin-top:10px;display:none;font-family:var(--mono);font-size:11px;background:var(--bg3);border-radius:7px;padding:10px 12px;border:1px solid var(--border)"></div>
       </div>
       <div class="s-card">
+        <h4>🏷️ Tag Categories</h4>
+        <p class="s-desc">Strategy tags (amber) are user-defined. Suggested-by tags are always violet, analyst names (#First-Last) always teal.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;min-height:28px;margin-bottom:10px" id="strategy-tag-list"></div>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input type="text" id="strategy-tag-input" placeholder="#my-strategy-tag" style="flex:1;font-size:11px;padding:5px 9px"/>
+          <button class="btn btn-sm" onclick="addStrategyTagFromSettings()">Add</button>
+        </div>
+        <p style="font-family:var(--mono);font-size:10px;color:var(--txt3)">Click a tag chip to remove it.</p>
+      </div>
+      <div class="s-card">
         <h4>&#8505;&#65039; About</h4>
         <p class="s-desc">Trading Journal is a self-contained local HTML app. All data stays on your machine — nothing is sent to any server.</p>
         <p style="font-size:12px;color:var(--txt3);line-height:1.65">Built with Chart.js and the Yahoo Finance API. Works offline after the first load.</p>
       </div>
     </div>
-    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.9.5 &nbsp;&middot;&nbsp; 2026</div>
+    <div class="s-footer">Trading Journal &nbsp;&middot;&nbsp; v1.9.7 &nbsp;&middot;&nbsp; 2026</div>
   </div>
 </div>
 </div>
@@ -607,9 +620,44 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
 
 <script>
 'use strict';
+window.onerror=function(msg,src,line,col,err){
+  const box=document.getElementById('err-overlay');
+  const txt=document.getElementById('err-text');
+  if(box&&txt){
+    txt.textContent='Error: '+msg+'\nFile: '+(src||'?')+'\nLine: '+(line||'?')+', Col: '+(col||'?')+'\nStack: '+(err?.stack||'n/a');
+    box.classList.add('on');
+  }
+  return false; // don't suppress, still log to console
+};
+window.onunhandledrejection=function(e){
+  const box=document.getElementById('err-overlay');
+  const txt=document.getElementById('err-text');
+  if(box&&txt){
+    txt.textContent='Unhandled Promise Rejection:\n'+(e.reason?.stack||e.reason||'unknown');
+    box.classList.add('on');
+  }
+};
+
 // ── CONSTANTS ──
 const PERIODS=[{label:'1W',days:7},{label:'1M',days:30},{label:'3M',days:90},{label:'6M',days:180},{label:'1Y',days:365}];
-const PAL=['tp0','tp1','tp2','tp3','tp4','tp5','tp6','tp7','tp8','tp9','tp10','tp11'];
+// Tag category system — replaces PAL hash approach
+let strategyTags=JSON.parse(localStorage.getItem('tj_strategy_tags')||'["#dip-buy","#reversal","#cluster","#breakout","#swing","#earnings-play","#momentum"]');
+function saveStrategyTags(){localStorage.setItem('tj_strategy_tags',JSON.stringify(strategyTags));}
+const TAG_CAT_CSS=['tc-suggested','tc-analyst','tc-strategy','tc-other'];
+function isAnalystTag(tag){
+  const parts=(tag.startsWith('#')?tag.slice(1):tag).split('-');
+  if(parts.length<2)return false;
+  // Each part must start with uppercase; exclude known non-analyst prefixes
+  const skip=/^(large|mid|small|micro|high|medium|low|dip|stop|thesis|us|eu|uk|ai|ev)$/i;
+  return parts.every(p=>p.length>0&&/[A-Z]/.test(p[0])&&!skip.test(p));
+}
+function tagCat(tag){
+  if(tag.toLowerCase().includes('suggested'))return 0;
+  if(isAnalystTag(tag))return 1;
+  if(strategyTags.map(s=>s.toLowerCase()).includes(tag.toLowerCase()))return 2;
+  return 3;
+}
+function sortTagList(tags){return[...tags].sort((a,b)=>{const ca=tagCat(a),cb=tagCat(b);return ca!==cb?ca-cb:a.localeCompare(b);});}
 const LINE_COLS=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899','#84cc16','#6366f1','#14b8a6','#e11d48'];
 const THEME_LOGO={'light':'candle','dark':'wave','midnight':'candle','forest':'candle','dusk':'wave'};
 
@@ -918,10 +966,10 @@ function fps(v,c='USD'){if(v==null||isNaN(v))return'—';const s={USD:'$',EUR:'�
 function fd(s){if(!s)return'—';return new Date(s+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function showT(m,t=''){const el=document.getElementById('toast');el.textContent=m;el.className='toast on'+(t?' '+t:'');clearTimeout(el._x);el._x=setTimeout(()=>{el.className='toast';},3200);}
-function tCls(t){let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return PAL[h%PAL.length];}
+function tCls(tag){return TAG_CAT_CSS[tagCat(tag)];}
 function tagHtml(t){return`<span class="tc2 ${tCls(t)}">${esc(t)}</span>`;}
 function normTags(t){if(!t)return[];if(typeof t==='string')return t.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);if(Array.isArray(t))return t.map(x=>String(x).trim()).filter(Boolean).map(x=>x.startsWith('#')?x:'#'+x);return[];}
-function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return[...s].sort();}
+function allTags(){const s=new Set();trades.forEach(t=>t.tags.forEach(g=>s.add(g)));return sortTagList([...s]);}
 function earliest(){const e={};trades.forEach(t=>{const k=t.ticker.toUpperCase();if(!e[k]||t.date<e[k])e[k]=t.date;});return e;}
 
 // ── FILE HANDLING ──
@@ -1908,10 +1956,19 @@ function buildNTTab(){
   renderTL();
 }
 function setAction(a){newAction=a;document.getElementById('f-buy').className=a==='buy'?'ab-buy':'';document.getElementById('f-sell').className=a==='sell'?'ab-sell':'';}
-function buildTagPicker(){
+function buildTagPicker(filter=''){
   const at=allTags();const chips=document.getElementById('tag-chips');if(!chips)return;
+  const shown=filter?at.filter(t=>t.toLowerCase().includes(filter.toLowerCase())):at;
   chips.innerHTML='';document.getElementById('sug-zone').style.display=at.length?'':'none';
-  at.forEach(tag=>{const c=document.createElement('span');c.className=`pick-chip ${tCls(tag)}`;c.textContent=tag;c.onclick=()=>toggleTag(tag);chips.appendChild(c);});
+  shown.forEach(tag=>{
+    const sp=document.createElement('span');sp.className=`pick-chip ${tCls(tag)}`;sp.textContent=tag;
+    sp.onclick=()=>{toggleTag(tag);const inp=document.getElementById('tag-custom');if(inp){inp.value='';buildTagPicker('');}};
+    chips.appendChild(sp);
+  });
+  if(filter&&!shown.length){
+    const h=document.createElement('span');h.style.cssText='font-family:var(--mono);font-size:10px;color:var(--txt3);font-style:italic';
+    h.textContent='No match — press Enter to create';chips.appendChild(h);
+  }
   refreshSelArea();
 }
 function toggleTag(tag){if(selTags.has(tag))selTags.delete(tag);else selTags.add(tag);refreshSelArea();}
@@ -1919,19 +1976,18 @@ function refreshSelArea(){
   const area=document.getElementById('sel-tags');if(!area)return;area.innerHTML='';
   if(!selTags.size){area.classList.add('empty');return;}
   area.classList.remove('empty');
-  [...selTags].forEach(tag=>{const s=document.createElement('span');s.className=`s-chip ${tCls(tag)}`;s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
+  sortTagList([...selTags]).forEach(tag=>{const s=document.createElement('span');s.className=`s-chip ${tCls(tag)}`;s.innerHTML=`${esc(tag)}<span style="cursor:pointer;margin-left:3px;opacity:.6" onclick="rmTag('${esc(tag)}')">✕</span>`;area.appendChild(s);});
   document.querySelectorAll('#tag-chips .pick-chip').forEach(c=>{c.style.opacity=selTags.has(c.textContent)?.2:.6;});
 }
 window.rmTag=t=>{selTags.delete(t);refreshSelArea();};
 document.getElementById('tag-add-btn').onclick=addCustomTag;
+document.getElementById('tag-custom').addEventListener('input',e=>{buildTagPicker(e.target.value.replace(/^#/,''));});
 document.getElementById('tag-custom').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addCustomTag();}};
 function addCustomTag(){
   const inp=document.getElementById('tag-custom');if(!inp)return;
-  let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;inp.value='';selTags.add(val);
-  const chips=document.getElementById('tag-chips');
-  if(chips&&![...chips.querySelectorAll('.pick-chip')].find(c=>c.textContent===val)){
-    const c=document.createElement('span');c.className=`pick-chip ${tCls(val)}`;c.textContent=val;c.onclick=()=>toggleTag(val);chips.appendChild(c);
-  }
+  let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;
+  inp.value='';selTags.add(val);
+  buildTagPicker(''); // rebuild full list (new tag will appear if it exists in allTags)
   refreshSelArea();
 }
 
@@ -2136,7 +2192,26 @@ async function runPingTest(){
     if(status)status.textContent='Test failed: '+e.message;
   }
 }
+function buildStrategyTagsUI(){
+  const list=document.getElementById('strategy-tag-list');if(!list)return;
+  list.innerHTML='';
+  strategyTags.forEach(tag=>{
+    const sp=document.createElement('span');sp.className=`tc2 tc-strategy`;
+    sp.style.cursor='pointer';sp.title='Click to remove';
+    sp.innerHTML=esc(tag)+'<span style="margin-left:4px;opacity:.55">✕</span>';
+    sp.onclick=()=>{strategyTags=strategyTags.filter(t=>t!==tag);saveStrategyTags();buildStrategyTagsUI();};
+    list.appendChild(sp);
+  });
+}
+function addStrategyTagFromSettings(){
+  const inp=document.getElementById('strategy-tag-input');if(!inp)return;
+  let val=inp.value.trim();if(!val)return;if(!val.startsWith('#'))val='#'+val;
+  val=val.toLowerCase();inp.value='';
+  if(!strategyTags.includes(val))strategyTags.push(val);
+  saveStrategyTags();buildStrategyTagsUI();
+}
 function buildSettingsTab(){
+  buildStrategyTagsUI();
   updateFileInfo();
   const note=document.getElementById('fsa-note');
   if(note)note.textContent=hasFSA?'✓ File System Access supported. File auto-loads next session.':'⚠ Auto-load requires Chrome or Edge. Changes are downloaded as a new file.';
@@ -2148,6 +2223,8 @@ function buildSettingsTab(){
 }
 document.getElementById('s-pick').onclick=()=>hasFSA?pickFSA():document.getElementById('fi').click();
 document.getElementById('s-reload').onclick=async()=>{if(fileHandle)await loadHandle(fileHandle);else showT('No file handle','err');};
+document.getElementById('strategy-tag-input')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStrategyTagFromSettings();}});
+document.getElementById('strategy-tag-input')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStrategyTagFromSettings();}});
 
 // ── PROGRESS ──
 function setPB(p){const w=document.getElementById('pb-wrap'),b=document.getElementById('pb');if(p<=0){w.classList.remove('on');b.style.width='0%';return;}w.classList.add('on');b.style.width=p+'%';}
@@ -2165,5 +2242,15 @@ function hideLS(){document.getElementById('ls').classList.remove('on');}
   try{const h=await idbGet('fh');if(!h)return;const p=await h.queryPermission({mode:'readwrite'});if(p==='granted'){fileHandle=h;showT('Auto-loading…');await loadHandle(h);}}catch(e){}
 })();
 </script>
+
+<div class="err-overlay" id="err-overlay">
+  <div class="err-box">
+    <h3>⚠ JavaScript Error</h3>
+    <pre id="err-text"></pre>
+    <p class="err-note">Copy this message and paste it into your support chat for troubleshooting.</p>
+    <button class="err-copy" onclick="navigator.clipboard?.writeText(document.getElementById('err-text').textContent).then(()=>this.textContent='Copied!').catch(()=>this.textContent='Select + copy manually')">📋 Copy error</button>
+    <button class="err-close" onclick="document.getElementById('err-overlay').classList.remove('on')">Dismiss</button>
+  </div>
+</div>
 </body>
 </html>
